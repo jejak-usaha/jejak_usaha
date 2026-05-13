@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jejak Usaha | Menelusuri Jejak, Menginspirasi Usaha</title>
+    
+    <!-- Google Fonts: Merriweather untuk Judul, Inter untuk Teks -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:ital,wght@0,400;0,700;0,900;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        /* === VARIABEL WARNA & TEMA === */
+        :root {
+            --dark-green: #1b4332;
+            --fresh-green: #2d6a4f;
+            --light-green: #e8f5e9;
+            --white: #ffffff;
+            --off-white: #f8f9fa;
+            --text-dark: #1f2937;
+            --text-gray: #6b7280;
+            --border-color: #e5e7eb;
+        }
+
+        /* === RESET DASAR === */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; color: var(--text-dark); background-color: var(--white); line-height: 1.6; overflow-x: hidden; }
+        h1, h2, h3, h4 { font-family: 'Merriweather', serif; color: var(--dark-green); }
+        a { text-decoration: none; color: inherit; transition: all 0.3s ease; }
+        img { max-width: 100%; height: auto; display: block; background-color: transparent; }
+        .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+        /* === 1. TOP BAR === */
+        .top-bar { background-color: var(--off-white); border-bottom: 1px solid var(--border-color); padding: 10px 0; font-size: 0.85rem; color: var(--text-gray); }
+
+        /* === 2. HEADER UTAMA === */
+        .main-header { padding: 35px 0; display: flex; align-items: center; justify-content: space-between; }
+        .brand-wrapper { display: flex; align-items: center; gap: 25px; }
+        
+        /* LOGO DIPERBESAR DI SINI */
+        .main-logo { height: 130px; width: auto; max-width: 450px; object-fit: contain; }
+        
+        .brand-text { border-left: 3px solid var(--fresh-green); padding-left: 20px; }
+        .brand-text p { font-size: 0.95rem; color: var(--text-gray); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; max-width: 250px; line-height: 1.4; }
+        
+        .search-box { display: flex; align-items: center; }
+        .search-box input { padding: 12px 15px; border: 1px solid var(--border-color); border-right: none; border-radius: 6px 0 0 6px; outline: none; width: 250px; font-family: 'Inter', sans-serif;}
+        .search-box button { background-color: var(--dark-green); color: var(--white); border: 1px solid var(--dark-green); padding: 12px 25px; border-radius: 0 6px 6px 0; cursor: pointer; font-weight: 600; }
+
+        /* === 3. NAVIGASI STICKY === */
+        .main-nav { background-color: var(--dark-green); position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .nav-list { list-style: none; display: flex; justify-content: center; gap: 35px; }
+        .nav-list li a { display: block; padding: 18px 0; color: var(--white); font-weight: 600; font-size: 0.95rem; text-transform: uppercase; position: relative; }
+        .nav-list li a:hover::after, .nav-list li a.active::after { width: 100%; }
+        .nav-list li a::after { content: ''; position: absolute; width: 0; height: 3px; bottom: 0; left: 0; background-color: var(--fresh-green); transition: width 0.3s ease; }
+
+        /* === 4. NEWS TICKER (BERITA BERJALAN) === */
+        .news-ticker-wrap { background-color: var(--dark-green); border-top: 1px solid rgba(255,255,255,0.1); color: var(--white); display: flex; align-items: center; font-size: 0.9rem; overflow: hidden; }
+        .ticker-label { background-color: var(--fresh-green); padding: 10px 20px; font-weight: 800; text-transform: uppercase; z-index: 2; }
+        .ticker-content { flex-grow: 1; padding: 0 15px; overflow: hidden; }
+        .ticker-text { display: inline-block; padding-left: 100%; animation: ticker 45s linear infinite; white-space: nowrap; }
+        .ticker-text span { margin-right: 60px; font-weight: 500; }
+        .ticker-text b { color: #facc15; }
+        @keyframes ticker { 0% { transform: translate3d(0, 0, 0); } 100% { transform: translate3d(-100%, 0, 0); } }
+
+        /* === 5. HERO SECTION === */
+        .hero { padding: 40px 0; background-color: var(--off-white); border-bottom: 1px solid var(--border-color); }
+        .hero-inner { display: grid; grid-template-columns: 1.5fr 1fr; gap: 40px; align-items: center; }
+        .hero-image img { width: 100%; height: 450px; object-fit: cover; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .label { display: inline-block; background-color: var(--light-green); color: var(--dark-green); padding: 5px 15px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; border-radius: 6px; margin-bottom: 15px; }
+        .hero-content h2 { font-size: 2.8rem; line-height: 1.2; margin-bottom: 20px; }
+        .hero-content p { font-size: 1.15rem; color: var(--text-gray); margin-bottom: 30px; }
+        .btn { display: inline-block; background-color: var(--dark-green); color: var(--white); padding: 14px 28px; font-weight: 600; border-radius: 6px; transition: all 0.3s; }
+        .btn:hover { background-color: var(--fresh-green); transform: translateY(-2px); }
+
+        /* === 6. MAIN CONTENT WRAPPER === */
+        .content-wrapper { display: grid; grid-template-columns: 2.5fr 1fr; gap: 50px; padding: 50px 0; }
+        .section-title { font-size: 2.2rem; border-bottom: 5px solid var(--dark-green); padding-bottom: 12px; margin-bottom: 40px; display: inline-block; }
+        .news-category { margin-bottom: 70px; }
+        
+        .news-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; }
+        .news-card { border: 1px solid var(--border-color); border-radius: 12px; overflow: hidden; background-color: var(--white); display: flex; flex-direction: column; transition: all 0.3s ease; }
+        .news-card:hover { transform: translateY(-8px); box-shadow: 0 15px 35px rgba(0,0,0,0.1); }
+        .card-img-wrap { height: 230px; overflow: hidden; border-bottom: 4px solid var(--fresh-green); }
+        .card-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+        .news-card:hover img { transform: scale(1.05); }
+        .card-body { padding: 25px; flex-grow: 1; }
+        .card-body h3 { font-size: 1.25rem; line-height: 1.4; margin-bottom: 12px; }
+        .meta-author { font-size: 0.85rem; color: var(--dark-green); margin-bottom: 15px; display: block; font-weight: 700;}
+        .card-body p { font-size: 1rem; color: var(--text-gray); display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+
+        /* === 7. SIDEBAR === */
+        .sidebar { padding-top: 15px; }
+        .widget { background-color: var(--white); padding: 30px; border-radius: 12px; border: 1px solid var(--border-color); border-top: 6px solid var(--dark-green); margin-bottom: 40px; box-shadow: 0 5px 15px rgba(0,0,0,0.02); }
+        .widget-title { font-size: 1.4rem; margin-bottom: 25px; border-bottom: 2px solid var(--border-color); padding-bottom: 15px; }
+        .pop-news-list { list-style: none; counter-reset: pop-counter; }
+        .pop-news-list li { position: relative; padding-left: 45px; margin-bottom: 25px; }
+        .pop-news-list li::before { counter-increment: pop-counter; content: counter(pop-counter); position: absolute; left: 0; width: 34px; height: 34px; background-color: var(--dark-green); color: var(--white); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; }
+        .pop-news-list li a { font-family: 'Merriweather', serif; font-size: 1.05rem; font-weight: 700; }
+        .stat-box { background-color: var(--dark-green); color: var(--white); text-align: center; border: none; }
+        .stat-number { font-size: 3.5rem; font-weight: 900; color: var(--light-green); }
+
+        /* === 8. FOOTER === */
+        .site-footer { background-color: #0f172a; color: #cbd5e1; padding: 80px 0 30px; }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1.2fr 1fr; gap: 60px; margin-bottom: 50px; }
+        .footer-brand { display: flex; flex-direction: column; gap: 20px; }
+        .footer-logo { width: 240px; height: auto; background-color: var(--white); padding: 12px 18px; border-radius: 8px; }
+        .footer-brand p { font-size: 0.95rem; line-height: 1.8; color: #94a3b8; }
+        .footer-title { color: var(--white); font-size: 1.3rem; margin-bottom: 25px; position: relative; padding-bottom: 12px; text-transform: uppercase; letter-spacing: 1px;}
+        .footer-title::after { content: ''; position: absolute; left: 0; bottom: 0; width: 50px; height: 3px; background-color: var(--fresh-green); }
+        .footer-links { list-style: none; }
+        .footer-links li { margin-bottom: 15px; }
+        .footer-links li a:hover { color: var(--fresh-green); transform: translateX(5px); display: inline-block;}
+        .contact-info p { margin-bottom: 12px; color: #cbd5e1; font-weight: 500;}
+        .ig-btn { display: inline-flex; align-items: center; gap: 10px; background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); color: white; padding: 12px 24px; border-radius: 30px; font-weight: 700; margin-top: 15px; }
+        .footer-bottom { border-top: 1px solid #1e293b; padding-top: 25px; display: flex; justify-content: space-between; font-size: 0.9rem; color: #64748b;}
+
+        /* MEDIA QUERIES */
+        @media (max-width: 992px) { .content-wrapper, .hero-inner, .footer-grid { grid-template-columns: 1fr; } .main-header { flex-direction: column; gap: 25px; } .search-box input { width: 100%; } }
+        @media (max-width: 768px) { .news-grid { grid-template-columns: 1fr; } .nav-list { gap: 15px; flex-wrap: wrap; justify-content: center; } .nav-list li a { font-size: 0.8rem; padding: 10px 5px; } }
+    </style>
+</head>
+<body>
+
+    <!-- 1. TOP BAR -->
+    <div class="top-bar">
+        <div class="container"><span id="current-date">Memuat tanggal...</span></div>
+    </div>
+
+    <!-- 2. HEADER UTAMA -->
+    <header class="main-header container">
+        <div class="brand-wrapper">
+            <a href="index.html">
+                <!-- LOGO TANPA FOLDER IMAGES -->
+                <img src="logo-jejak-usaha.png" alt="Logo Jejak Usaha" class="main-logo">
+            </a>
+            <div class="brand-text"><p>Menelusuri Jejak, Menginspirasi Usaha</p></div>
+        </div>
+        <div class="search-box">
+            <input type="text" placeholder="Cari liputan data...">
+            <button>Cari</button>
+        </div>
+    </header>
+
+    <!-- 3. NAVIGASI UTAMA (MULTI-PAGE) -->
+    <nav class="main-nav">
+        <ul class="nav-list container">
+            <li><a href="index.html" class="active">Beranda</a></li>
+            <li><a href="kategori-kuliner.html">UMKM Kuliner</a></li>
+            <li><a href="kategori-jasa.html">UMKM Jasa</a></li>
+            <li><a href="kategori-ritel.html">UMKM Ritel</a></li>
+            <li><a href="tentang-kami.html">Tentang Kami</a></li>
+        </ul>
+    </nav>
+
+    <!-- 4. NEWS TICKER -->
+    <div class="news-ticker-wrap">
+        <div class="ticker-label">Headline</div>
+        <div class="ticker-content">
+            <div class="ticker-text">
+                <span><b>KULINER:</b> Ketintang Jadi Kantong Kuliner Mahasiswa, Ini Sebaran Jenis Dagangannya</span>
+                <span><b>JASA:</b> Geliat Bisnis Cuci Pakaian: Adu Kuat Omzet Laundry Koin vs Laundry Kiloan</span>
+                <span><b>RITEL:</b> Siasat Ritel Royal Plaza Pikat Pembeli Melalui Adu Strategi Pajangan Hingga Konten Digital</span>
+                <span><b>DATA:</b> Mayoritas UMKM Ketintang Gunakan QRIS Namun Tetap Bertumpu Konvensional</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 5. HERO SECTION -->
+    <section class="hero">
+        <div class="container hero-inner">
+            <div class="hero-image"><img src="topik2-berita2.png" alt="Laundry Ketintang"></div>
+            <div class="hero-content">
+                <span class="label">Liputan Utama</span>
+                <h2><a href="topik2-berita2.html">Geliat Bisnis Cuci Pakaian di Ketintang: Adu Kuat Omzet Laundry Koin vs Laundry Kiloan</a></h2>
+                <p>Data menunjukkan laundry kiloan mampu meraup pendapatan bersih 3x lipat lebih besar dibanding laundry koin. Temukan analisis perputaran uang dan volume harian UMKM jasa ini.</p>
+                <a href="topik2-berita2.html" class="btn">Baca Liputan Data</a>
+            </div>
+        </div>
+    </section>
+
+    <div class="container content-wrapper">
+        <main>
+            <!-- SEKSI 1: UMKM KULINER -->
+            <section id="kuliner" class="news-category">
+                <h2 class="section-title">UMKM Kuliner</h2>
+                <div class="news-grid">
+                    <article class="news-card">
+                        <div class="card-img-wrap"><a href="topik1-berita1.html"><img src="topik1-berita1.png" alt="Kuliner 1"></a></div>
+                        <div class="card-body">
+                            <span class="meta-author">Raditya Budi Prianugraha</span>
+                            <h3><a href="topik1-berita1.html">Ketintang Jadi Kantong Kuliner Mahasiswa: Sebaran Jenis Dagangan</a></h3>
+                            <p>Membedah lebih dari 60 varian makanan di Ketintang, di mana 44% didominasi oleh makanan berat.</p>
+                        </div>
+                    </article>
+                    <article class="news-card">
+                        <div class="card-img-wrap"><a href="topik1-berita2.html"><img src="topik1-berita2.png" alt="Kuliner 2"></a></div>
+                        <div class="card-body">
+                            <span class="meta-author">Deni Agus Wicaksono</span>
+                            <h3><a href="topik1-berita2.html">Mahasiswa Jadi Urat Nadi Perputaran Uang UMKM Kuliner</a></h3>
+                            <p>Data menunjukkan 68% konsumen memilih tempat makan berdasarkan harga terjangkau dan porsi besar.</p>
+                        </div>
+                    </article>
+                    <article class="news-card">
+                        <div class="card-img-wrap"><a href="topik1-berita3.html"><img src="topik1-berita3.png" alt="Kuliner 3"></a></div>
+                        <div class="card-body">
+                            <span class="meta-author">Burhanudin Yusuf</span>
+                            <h3><a href="topik1-berita3.html">Perbandingan Omset Pedagang Makanan di SWK dan PKL</a></h3>
+                            <p>Analisis stabilitas pendapatan di Sentra Wisata Kuliner dibandingkan fluktuasi pedagang pinggir jalan.</p>
+                        </div>
+                    </article>
+                    <article class="news-card">
+                        <div class="card-img-wrap"><a href="topik1-berita4.html"><img src="topik1-berita4.png" alt="Kuliner 4"></a></div>
+                        <div class="card-body">
+                            <span class="meta-author">Seka Ramajati</span>
+                            <h3><a href="topik1-berita4.html">Adopsi QRIS Tinggi, UMKM Tetap Pakai Strategi Konvensional</a></h3>
+                            <p>Meskipun 85% UMKM menggunakan QRIS, faktor rasa dan harga tetap menjadi penentu utama loyalitas.</p>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <!-- SEKSI 2: UMKM JASA -->
+            <section id="jasa" class="news-category">
+                <h2 class="section-title">UMKM Jasa</h2>
+                <div class="news-grid">
+                    <article class="news-card">
+                        <div class="card-img-wrap"><a href="topik2-berita1.html"><img src="topik2-berita1.png" alt="Jasa 1"></a></div>
+                        <div class="card-body">
+                            <span class="meta-author">Raditya Budi Prianugraha</span>
+                            <h3><a href="topik2-berita1.html">Ketintang Tak Pernah Sepi: UMKM Jasa Tumbuh Pesat</a></h3>
+                            <p>Dari laundry koin hingga barbershop, sektor jasa berkembang mengikuti gaya hidup mahasiswa.</p>
+                        </div>
+                    </article>
+                    <article class="news-card">
+                        <div class="card-img-wrap"><a href="topik2-berita2.html"><img src="topik2-berita2.png" alt="Jasa 2"></a></div>
+                        <div class="card-body">
+                            <span class="meta-author">Deni Agus Wicaksono</span>
+                            <h3><a href="topik2-berita2.html">Adu Kuat Omzet Laundry Koin vs Laundry Kiloan</a></h3>
+                            <p>Perbedaan perputaran uang mencapai 3x lipat. Temukan rahasia di balik angka omzet harian mereka.</p>
+                        </div>
+                    </article>
+                    <article class="news-card">
+                        <div class="card-img-wrap"><a href="topik2-berita3.html"><img src="topik2-berita3.png" alt="Jasa 3"></a></div>
+                        <div class="card-body">
+                            <span class="meta-author">Burhanudin Yusuf</span>
+                            <h3><a href="topik2-berita3.html">Adu Strategi Bengkel: Garansi Resmi AHASS vs Bengkel Umum</a></h3>
+                            <p>Bagaimana mekanik AHASS dan bengkel konvensional membangun loyalitas di tengah ketatnya persaingan.</p>
+                        </div>
+                    </article>
+                    <article class="news-card">
+                        <div class="card-img-wrap"><a href="topik2-berita4.html"><img src="topik2-berita4.png" alt="Jasa 4"></a></div>
+                        <div class="card-body">
+                            <span class="meta-author">Seka Ramajati</span>
+                            <h3><a href="topik2-berita4.html">Barbershop Modern vs Cukur Tradisional di Ketintang</a></h3>
+                            <p>Kenyamanan fasilitas modern bersaing dengan loyalitas pelanggan jasa cukur konvensional.</p>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <!-- SEKSI 3: UMKM RITEL -->
+            <section id="ritel" class="news-category">
+                <h2 class="section-title">UMKM Ritel</h2>
+                <div class="news-grid">
+                    <article class="news-card">
+                        <div class="card-img-wrap"><a href="topik3-berita1.html"><img src="topik3-berita1.png" alt="Ritel 1"></a></div>
+                        <div class="card-body">
+                            <span class="meta-author">Raditya Budi Prianugraha</span>
+                            <h3><a href="topik3-berita1.html">Cara UMKM Toko Bertahan di Tengah Ramainya Royal Plaza</a></h3>
+                            <p>Strategi pedagang ritel mulai dari kaus kaki hingga skincare untuk menarik pengunjung mal.</p>
+                        </div>
+                    </article>
+                    <article class="news-card">
+                        <div class="card-img-wrap"><a href="topik3-berita2.html"><img src="topik3-berita2.png" alt="Ritel 2"></a></div>
+                        <div class="card-body">
+                            <span class="meta-author">Deni Agus Wicaksono</span>
+                            <h3><a href="topik3-berita2.html">Peta Kekuatan Omzet Berdasarkan Tata Letak Lapak Mal</a></h3>
+                            <p>Anomali data di Royal Plaza: Kenapa lokasi sepi bisa cetak ratusan juta per bulan?</p>
+                        </div>
+                    </article>
+                    <article class="news-card">
+                        <div class="card-img-wrap"><a href="topik3-berita3.html"><img src="topik3-berita3.png" alt="Ritel 3"></a></div>
+                        <div class="card-body">
+                            <span class="meta-author">Burhanudin Yusuf</span>
+                            <h3><a href="topik3-berita3.html">Siasat Pikat Pembeli: Pajangan vs Konten Digital</a></h3>
+                            <p>Analisis visual merchandising dan peran media sosial bagi tenant ritel mal.</p>
+                        </div>
+                    </article>
+                    <article class="news-card">
+                        <div class="card-img-wrap"><a href="topik3-berita4.html"><img src="topik3-berita4.png" alt="Ritel 4"></a></div>
+                        <div class="card-body">
+                            <span class="meta-author">Seka Ramajati</span>
+                            <h3><a href="topik3-berita4.html">Mengukur Dampak Lokasi dan Fluktuasi Pengunjung</a></h3>
+                            <p>Korelasi posisi tenant dan "Golden Hours" terhadap konversi pembeli harian.</p>
+                        </div>
+                    </article>
+                </div>
+            </section>
+        </main>
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="widget">
+                <h3 class="widget-title">Berita Terpopuler</h3>
+                <ul class="pop-news-list">
+                    <li><a href="topik3-berita2.html">Peta Kekuatan Omzet Ritel Royal Plaza</a></li>
+                    <li><a href="topik2-berita2.html">Adu Kuat Omzet Laundry Koin vs Kiloan</a></li>
+                    <li><a href="topik1-berita2.html">Mahasiswa Jadi Urat Nadi Perputaran Uang</a></li>
+                </ul>
+            </div>
+            <div class="widget stat-box">
+                <h4>Data Terkumpul</h4>
+                <div class="stat-number">50+</div>
+                <p>Responden UMKM telah diobservasi.</p>
+            </div>
+        </aside>
+    </div>
+
+    <!-- 8. FOOTER -->
+    <footer class="site-footer">
+        <div class="container footer-grid">
+            
+            <div class="footer-brand">
+                <!-- LOGO TANPA FOLDER IMAGES -->
+                <img src="logo-jejak-usaha.png" alt="Logo Jejak Usaha" class="footer-logo">
+                <p>Media berita lokal yang mengedepankan akurasi data dan integritas informasi untuk masyarakat cerdas yang berfokus pemberdayaan UMKM lokal.</p>
+            </div>
+            
+            <div class="footer-links-wrap">
+                <h3 class="footer-title">TAUTAN PENTING</h3>
+                <ul class="footer-links">
+                    <li><a href="tentang-kami.html">Tentang Kami</a></li>
+                    <li><a href="redaksi.html">Redaksi</a></li>
+                    <li><a href="pedoman-media-siber.html">Pedoman Media Siber</a></li>
+                    <li><a href="karir.html">Karir</a></li>
+                    <li><a href="disclaimer.html">Disclaimer & Privacy Policy</a></li>
+                </ul>
+            </div>
+
+            <div class="contact-info">
+                <h3 class="footer-title">Hubungi Kami</h3>
+                <p>📍 Surabaya, Jawa Timur</p>
+                <p>✉️ jejakusaha3@gmail.com</p>
+                <a href="https://www.instagram.com/jejakusaha.id?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" class="ig-btn">
+                    Instagram Jejak Usaha
+                </a>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <p>&copy; 2026 Jejak Usaha. Hak Cipta Dilindungi Undang-Undang.</p>
+            <p>Dibangun untuk Proyek Jurnalisme Data</p>
+        </div>
+    </footer>
+
+    <script>
+        const dateElement = document.getElementById('current-date');
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        dateElement.textContent = new Date().toLocaleDateString('id-ID', options);
+    </script>
+</body>
+</html>

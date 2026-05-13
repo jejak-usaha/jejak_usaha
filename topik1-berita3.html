@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perbandingan Omset Pedagang Makanan SWK dan PKL | Jejak Usaha</title>
+    
+    <!-- Memanggil Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:ital,wght@0,400;0,700;0,900;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        /* === VARIABEL WARNA === */
+        :root {
+            --dark-green: #1b4332;
+            --fresh-green: #2d6a4f;
+            --light-green: #e8f5e9;
+            --white: #ffffff;
+            --off-white: #f8f9fa;
+            --text-dark: #1f2937;
+            --text-gray: #4b5563;
+            --border-color: #e5e7eb;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; color: var(--text-dark); background-color: var(--off-white); line-height: 1.7; }
+        h1, h2, h3, h4 { font-family: 'Merriweather', serif; color: var(--dark-green); }
+        a { text-decoration: none; color: inherit; transition: all 0.3s ease; }
+        img { max-width: 100%; height: auto; display: block; border-radius: 8px; }
+        .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+        /* === 1. TOP BAR, HEADER & NAV === */
+        .top-bar { background-color: var(--white); border-bottom: 1px solid var(--border-color); padding: 10px 0; font-size: 0.85rem; color: var(--text-gray); }
+        .main-header { padding: 30px 0; display: flex; align-items: center; justify-content: space-between; background-color: var(--white); }
+        .brand-wrapper { display: flex; align-items: center; gap: 20px; }
+        .main-logo { height: 70px; width: auto; max-width: 300px; object-fit: contain; }
+        .brand-text { border-left: 3px solid var(--fresh-green); padding-left: 20px; }
+        .brand-text p { font-size: 0.9rem; color: var(--text-gray); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; line-height: 1.4; max-width: 200px;}
+        .search-box { display: flex; align-items: center; }
+        .search-box input { padding: 10px 15px; border: 1px solid var(--border-color); border-right: none; border-radius: 6px 0 0 6px; outline: none; width: 250px; font-family: 'Inter', sans-serif;}
+        .search-box button { background-color: var(--dark-green); color: var(--white); border: 1px solid var(--dark-green); padding: 10px 20px; border-radius: 0 6px 6px 0; cursor: pointer; font-weight: 600; }
+        .search-box button:hover { background-color: var(--fresh-green); }
+
+        .main-nav { background-color: var(--dark-green); position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .nav-list { list-style: none; display: flex; justify-content: center; gap: 35px; }
+        .nav-list li a { display: block; padding: 16px 0; color: var(--white); font-weight: 600; font-size: 0.95rem; text-transform: uppercase; position: relative; }
+        .nav-list li a::after { content: ''; position: absolute; width: 0; height: 3px; bottom: 0; left: 0; background-color: var(--fresh-green); transition: width 0.3s ease; }
+        .nav-list li a:hover::after, .nav-list li a.active::after { width: 100%; }
+
+        /* === 2. LAYOUT ARTIKEL === */
+        .article-wrapper {
+            display: grid;
+            grid-template-columns: 2.5fr 1fr;
+            gap: 50px;
+            padding: 40px 0;
+            background-color: var(--white);
+        }
+
+        .breadcrumb { font-size: 0.9rem; color: var(--text-gray); margin-bottom: 20px; font-weight: 500;}
+        .breadcrumb a { color: var(--fresh-green); }
+        .breadcrumb a:hover { text-decoration: underline; }
+
+        .article-header { margin-bottom: 30px; }
+        .article-category { display: inline-block; background-color: var(--light-green); color: var(--dark-green); padding: 6px 15px; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; border-radius: 6px; margin-bottom: 15px; }
+        .article-title { font-size: 2.8rem; line-height: 1.2; margin-bottom: 20px; letter-spacing: -0.5px; }
+        
+        .article-meta { display: flex; align-items: center; gap: 20px; border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); padding: 15px 0; color: var(--text-gray); font-size: 0.95rem; }
+        .author-name { font-weight: 700; color: var(--dark-green); display: flex; align-items: center; gap: 8px;}
+        
+        .article-hero-img { width: 100%; height: 500px; object-fit: cover; border-radius: 10px; margin-bottom: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.05);}
+        .img-caption { font-size: 0.85rem; color: #6b7280; text-align: center; margin-bottom: 40px; font-style: italic; }
+
+        .article-body p { font-size: 1.15rem; margin-bottom: 25px; color: #374151; }
+        .article-body h3 { font-size: 1.6rem; margin: 40px 0 20px 0; }
+        .article-body ul { margin-bottom: 25px; padding-left: 20px; font-size: 1.15rem; color: #374151; }
+        .article-body li { margin-bottom: 10px; }
+        
+        .article-tags { margin-top: 40px; display: flex; gap: 10px; align-items: center; flex-wrap: wrap;}
+        .article-tags span { font-weight: 700; color: var(--dark-green); font-size: 0.9rem;}
+        .tag { background-color: var(--off-white); border: 1px solid var(--border-color); padding: 5px 12px; border-radius: 20px; font-size: 0.85rem; color: var(--text-gray); transition: all 0.2s;}
+        .tag:hover { background-color: var(--light-green); color: var(--dark-green); border-color: var(--fresh-green);}
+
+        /* === FITUR BAGIKAN BERITA === */
+        .share-section { margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border-color); }
+        .share-section h4 { font-family: 'Inter', sans-serif; font-size: 1rem; color: var(--text-dark); margin-bottom: 15px; }
+        .share-buttons { display: flex; gap: 10px; flex-wrap: wrap; }
+        .share-btn { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; border-radius: 4px; font-size: 0.9rem; font-weight: 600; color: var(--white); transition: opacity 0.3s ease; }
+        .share-btn:hover { opacity: 0.85; color: var(--white); }
+        .btn-fb { background-color: #1877f2; }
+        .btn-tw { background-color: #1da1f2; }
+        .btn-ig { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
+
+        /* === 3. SIDEBAR === */
+        .sidebar { padding-top: 10px; }
+        .widget { background-color: var(--off-white); padding: 30px; border-radius: 12px; border: 1px solid var(--border-color); border-top: 5px solid var(--dark-green); margin-bottom: 40px; }
+        .widget-title { font-size: 1.4rem; margin-bottom: 25px; border-bottom: 2px solid var(--border-color); padding-bottom: 15px; }
+        .pop-news-list { list-style-type: none; counter-reset: pop-counter; }
+        .pop-news-list li { position: relative; padding-left: 45px; margin-bottom: 25px; }
+        .pop-news-list li::before { counter-increment: pop-counter; content: counter(pop-counter); position: absolute; left: 0; top: -3px; width: 32px; height: 32px; background-color: var(--dark-green); color: var(--white); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 1rem; font-family: 'Merriweather', serif; }
+        .pop-news-list li a { font-family: 'Merriweather', serif; font-size: 1.1rem; font-weight: 700; line-height: 1.4; color: var(--text-dark); transition: color 0.2s; }
+        .pop-news-list li a:hover { color: var(--fresh-green); }
+
+        /* === 4. FOOTER === */
+        .site-footer { background-color: #0f172a; color: #cbd5e1; padding: 70px 0 30px; }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 50px; margin-bottom: 50px; }
+        .footer-brand { display: flex; flex-direction: column; align-items: flex-start; gap: 15px; }
+        .footer-logo { width: 220px; height: auto; background-color: var(--white); padding: 10px 15px; border-radius: 8px; }
+        .footer-title { color: var(--white); font-size: 1.3rem; margin-bottom: 25px; position: relative; padding-bottom: 12px; }
+        .footer-title::after { content: ''; position: absolute; left: 0; bottom: 0; width: 50px; height: 3px; background-color: var(--fresh-green); }
+        .footer-links { list-style: none; }
+        .footer-links li { margin-bottom: 15px; }
+        .footer-links li a:hover { color: var(--fresh-green); }
+        .ig-btn { display: inline-flex; align-items: center; gap: 10px; background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); color: white; padding: 10px 20px; border-radius: 25px; font-weight: 600; font-size: 0.95rem; margin-top: 15px; }
+        .footer-bottom { border-top: 1px solid #1e293b; padding-top: 25px; display: flex; justify-content: space-between; align-items: center; font-size: 0.9rem; color: #64748b; }
+
+        @media (max-width: 992px) {
+            .article-wrapper { grid-template-columns: 1fr; padding: 20px; }
+            .article-title { font-size: 2.2rem; }
+            .article-hero-img { height: 350px; }
+            .main-header { flex-direction: column; gap: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- TOP BAR -->
+    <div class="top-bar">
+        <div class="container">
+            <span class="date" id="current-date">Memuat tanggal...</span>
+        </div>
+    </div>
+
+    <!-- HEADER UTAMA -->
+    <header class="main-header container">
+        <div class="brand-wrapper">
+            <a href="index.html">
+                <img src="logo-jejak-usaha.png" alt="Logo Jejak Usaha" class="main-logo">
+            </a>
+            <div class="brand-text">
+                <p>Menelusuri Jejak, Menginspirasi Usaha</p>
+            </div>
+        </div>
+        <div class="search-box">
+            <input type="text" placeholder="Cari liputan, data, atau UMKM...">
+            <button>Cari</button>
+        </div>
+    </header>
+
+    <!-- NAVIGATION BAR -->
+    <nav class="main-nav">
+        <ul class="nav-list container">
+            <li><a href="index.html">Beranda</a></li>
+            <li><a href="kategori-kuliner.html" class="active">UMKM Kuliner</a></li>
+            <li><a href="kategori-jasa.html">UMKM Jasa</a></li>
+            <li><a href="kategori-ritel.html">UMKM Ritel</a></li>
+            <li><a href="tentang-kami.html">Tentang Kami</a></li>
+        </ul>
+    </nav>
+
+    <!-- KONTEN ARTIKEL -->
+    <div style="background-color: var(--white);">
+        <div class="container article-wrapper">
+            
+            <main>
+                <!-- BREADCRUMB -->
+                <div class="breadcrumb">
+                    <a href="index.html">Beranda</a> / <a href="kategori-kuliner.html">UMKM Kuliner</a> / Analisis Data
+                </div>
+
+                <!-- HEADER ARTIKEL -->
+                <header class="article-header">
+                    <span class="article-category">UMKM Kuliner</span>
+                    
+                    <h1 class="article-title">Perbandingan Omset Pedagang Makanan di Sentra Wisata Kuliner (SWK) dan Pedagang Kaki Lima (PKL)</h1>
+                    
+                    <div class="article-meta">
+                        <span class="author-name">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                            Penulis: Burhanudin Yusuf
+                        </span>
+                        <span>Diperbarui pada Mei 2026</span>
+                        <span>Waktu Baca: 4 Menit</span>
+                    </div>
+                </header>
+
+                <!-- GAMBAR UTAMA ARTIKEL -->
+                <img src="topik1-berita3.png" alt="Sentra Wisata Kuliner vs PKL Ketintang" class="article-hero-img">
+                <p class="img-caption">Perbedaan suasana antara pedagang di dalam Sentra Wisata Kuliner (SWK) dan PKL di pinggir jalan Ketintang. (Foto: Jejak Usaha)</p>
+
+                <!-- ISI ARTIKEL NASKAH KETIGA (KARYA YUSUF) -->
+                <div class="article-body">
+                    <p><strong>SURABAYA, JEJAK USAHA</strong> — Berdasarkan hasil wawancara terhadap sejumlah pelaku UMKM di kawasan Ketintang, terdapat perbedaan yang cukup jelas antara omzet pedagang yang berjualan di dalam Sentra Wisata Kuliner (SWK) dan pedagang kaki lima (PKL) di pinggir jalan.</p>
+                    
+                    <p>Pedagang di dalam SWK cenderung memiliki omzet yang lebih tinggi dan relatif stabil dibandingkan PKL. Faktor utamanya adalah lokasi yang lebih tertata, jam operasional yang panjang, serta kenyamanan tempat bagi konsumen untuk makan di tempat.</p>
+
+                    <h3>Stabilitas Pendapatan di SWK</h3>
+                    <p>Salah satu pedagang di SWK, Bu Pur, mampu menjual sekitar 50 bungkus makanan per hari dengan jam operasional dari pagi hingga malam. Sementara itu, pedagang lain di SWK bahkan dapat mencapai omzet hingga <strong>Rp1.500.000 per hari</strong> saat kondisi ramai.</p>
+                    
+                    <p>Selain makanan berat, penjual minuman di dalam SWK juga menunjukkan performa yang cukup tinggi, dengan penjualan mencapai sekitar 100 gelas per hari. Hal ini menunjukkan bahwa keberadaan fasilitas yang lebih terorganisir serta arus pengunjung yang stabil memberikan keuntungan finansial yang lebih pasti bagi pedagang di dalam kawasan SWK.</p>
+
+                    <h3>Fluktuasi Omzet pada Pedagang Kaki Lima</h3>
+                    <p>Di sisi lain, pedagang kaki lima memiliki karakter omzet yang lebih fluktuatif. Bapak Aset, misalnya, mencatat omzet sekitar <strong>Rp500.000 per hari</strong> dari penjualan pentol dan gorengan tanpa menggunakan strategi promosi khusus.</p>
+
+                    <p>Pedagang jajanan lain seperti batagor dan cimol juga berada pada kisaran omzet Rp500.000 hingga Rp600.000 per hari. Namun, bagi pedagang minuman keliling seperti Bapak Midi, pendapatan yang diperoleh cenderung lebih rendah, yaitu sekitar Rp100.000 hingga Rp130.000 per hari, tergantung sepenuhnya pada lokasi dan tingkat keramaian saat itu.</p>
+
+                    <h3>Faktor Aksesibilitas dan Kenyamanan</h3>
+                    <p>Perbedaan omzet ini dipengaruhi oleh beberapa faktor utama:</p>
+                    <ul>
+                        <li><strong>SWK:</strong> Menawarkan tempat yang tetap dan terpusat, memudahkan konsumen untuk parkir dan makan dengan tenang.</li>
+                        <li><strong>PKL:</strong> Lebih mengandalkan mobilitas dan kepraktisan. Sangat cocok bagi konsumen yang ingin membeli secara cepat (<em>drive-thru</em> informal) tanpa harus berhenti lama.</li>
+                    </ul>
+
+                    <p>Dengan demikian, meskipun PKL tetap memiliki peluang mendapatkan omzet yang cukup besar, khususnya pada jenis makanan ringan dan jajanan, pedagang di dalam SWK cenderung memiliki keunggulan dalam hal kestabilan dan potensi pendapatan harian yang lebih tinggi. Hal ini membuktikan bahwa lokasi dan sistem penjualan menjadi faktor penentu krusial dalam kinerja ekonomi pelaku UMKM di kawasan Ketintang.</p>
+                </div>
+
+                <!-- BAGIKAN BERITA -->
+                <div class="share-section">
+                    <h4>Bagikan berita ini:</h4>
+                    <div class="share-buttons">
+                        <a href="https://www.facebook.com/sharer/sharer.php?u=#" target="_blank" class="share-btn btn-fb">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+                            Facebook
+                        </a>
+                        <a href="https://twitter.com/intent/tweet?url=#&text=Perbandingan%20Omset%20Pedagang%20SWK%20dan%20PKL" target="_blank" class="share-btn btn-tw">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg>
+                            Twitter
+                        </a>
+                        <a href="https://www.instagram.com/jejakusaha.id" target="_blank" class="share-btn btn-ig">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                            Instagram
+                        </a>
+                    </div>
+                </div>
+
+                <!-- TAG TOPIK -->
+                <div class="article-tags">
+                    <span>Topik Terkait:</span>
+                    <a href="#" class="tag">UMKM Kuliner</a>
+                    <a href="#" class="tag">Sentra Wisata Kuliner</a>
+                    <a href="#" class="tag">PKL Surabaya</a>
+                    <a href="#" class="tag">Analisis Omzet</a>
+                </div>
+            </main>
+
+            <!-- SIDEBAR KANAN -->
+            <aside class="sidebar">
+                <div class="widget">
+                    <h3 class="widget-title">Berita Terpopuler</h3>
+                    <ol class="pop-news-list">
+                        <li><a href="#">Peta Kekuatan Omzet UMKM Ritel Royal Plaza Berdasarkan Tata Letak Lapak</a></li>
+                        <li><a href="#">Ketintang Tak Pernah Sepi: Dari Laundry Koin hingga Barbershop, UMKM Jasa Tumbuh</a></li>
+                        <li><a href="#">Mahasiswa Jadi Urat Nadi Perputaran Uang Puluhan UMKM Kuliner di Ketintang</a></li>
+                        <li><a href="#">Adu Strategi Bengkel: Antara Garansi Resmi AHASS dan Fleksibilitas Bengkel Umum</a></li>
+                    </ol>
+                </div>
+                
+                <div style="background-color: var(--light-green); padding: 30px; border: 1px solid var(--fresh-green); border-radius: 8px; text-align: center;">
+                    <img src="logo-jejak-usaha.png" alt="Logo" style="margin: 0 auto; width: 120px; mix-blend-mode: multiply;">
+                    <p style="font-size: 0.9rem; color: var(--dark-green); font-weight: 600; margin-top: 15px;">Dukung Jurnalisme Data Lokal untuk Ekosistem UMKM.</p>
+                </div>
+            </aside>
+
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <img src="logo-jejak-usaha.png" alt="Logo Jejak Usaha" class="footer-logo">
+                <div><p>Media berita lokal yang mengedepankan akurasi data dan integritas informasi untuk masyarakat cerdas yang berfokus pemberdayaan UMKM lokal.</p></div>
+            </div>
+            <div class="footer-links-wrap">
+                <h3 class="footer-title">TAUTAN PENTING</h3>
+                <ul class="footer-links">
+                    <li><a href="tentang-kami.html">Tentang Kami</a></li>
+                    <li><a href="redaksi.html">Redaksi</a></li>
+                    <li><a href="pedoman-media-siber.html">Pedoman Media Siber</a></li>
+                    <li><a href="karir.html">Karir</a></li>
+                    <li><a href="disclaimer.html">Disclaimer & Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div class="contact-info">
+                <h3 class="footer-title">Hubungi Kami</h3>
+                <p>📍 Surabaya, Jawa Timur</p>
+                <p>✉️ jejakusaha3@gmail.com</p>
+                <a href="https://www.instagram.com/jejakusaha.id?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" class="ig-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                    Instagram Jejak Usaha
+                </a>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <p>&copy; 2026 Jejak Usaha. Hak Cipta Dilindungi Undang-Undang.</p>
+            <p>Dibangun untuk Proyek Jurnalisme Data</p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('current-date').textContent = new Date().toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+    </script>
+</body>
+</html>

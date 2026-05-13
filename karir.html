@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karir | Jejak Usaha</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:ital,wght@0,400;0,700;0,900;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root { --dark-green: #1b4332; --fresh-green: #2d6a4f; --light-green: #e8f5e9; --white: #ffffff; --off-white: #f8f9fa; --text-dark: #1f2937; --text-gray: #4b5563; --border-color: #e5e7eb; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; color: var(--text-dark); background-color: var(--off-white); line-height: 1.7; }
+        h1, h2, h3, h4 { font-family: 'Merriweather', serif; color: var(--dark-green); }
+        a { text-decoration: none; color: inherit; transition: all 0.3s ease; }
+        img { max-width: 100%; height: auto; display: block; border-radius: 8px; }
+        .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .top-bar { background-color: var(--white); border-bottom: 1px solid var(--border-color); padding: 10px 0; font-size: 0.85rem; color: var(--text-gray); }
+        .main-header { padding: 30px 0; display: flex; align-items: center; justify-content: space-between; background-color: var(--white); }
+        .brand-wrapper { display: flex; align-items: center; gap: 20px; }
+        .main-logo { height: 70px; width: auto; max-width: 300px; object-fit: contain; }
+        .brand-text { border-left: 3px solid var(--fresh-green); padding-left: 20px; }
+        .brand-text p { font-size: 0.9rem; color: var(--text-gray); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; line-height: 1.4; max-width: 200px;}
+        .search-box { display: flex; align-items: center; }
+        .search-box input { padding: 10px 15px; border: 1px solid var(--border-color); border-right: none; border-radius: 6px 0 0 6px; outline: none; width: 250px; font-family: 'Inter', sans-serif;}
+        .search-box button { background-color: var(--dark-green); color: var(--white); border: 1px solid var(--dark-green); padding: 10px 20px; border-radius: 0 6px 6px 0; cursor: pointer; font-weight: 600; }
+        .main-nav { background-color: var(--dark-green); position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .nav-list { list-style: none; display: flex; justify-content: center; gap: 35px; }
+        .nav-list li a { display: block; padding: 16px 0; color: var(--white); font-weight: 600; font-size: 0.95rem; text-transform: uppercase; position: relative; }
+        .category-header { background-color: var(--dark-green); color: var(--white); padding: 60px 0; text-align: center; border-bottom: 5px solid var(--fresh-green); margin-bottom: 40px;}
+        .category-header h1 { color: var(--white); font-size: 2.8rem; margin-bottom: 15px; }
+        .about-wrapper { max-width: 800px; margin: 0 auto; padding-bottom: 60px; text-align: center; }
+        .about-section { background-color: var(--white); padding: 70px 50px; border-radius: 12px; border: 1px solid var(--border-color); margin-bottom: 40px; box-shadow: 0 5px 15px rgba(0,0,0,0.02); }
+        .about-section p { font-size: 1.2rem; color: var(--text-gray); margin-top: 15px;}
+        .site-footer { background-color: #0f172a; color: #cbd5e1; padding: 70px 0 30px; }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 50px; margin-bottom: 50px; }
+        .footer-brand { display: flex; flex-direction: column; align-items: flex-start; gap: 15px; }
+        .footer-logo { width: 220px; background-color: var(--white); padding: 10px 15px; border-radius: 8px; }
+        .footer-title { color: var(--white); font-size: 1.3rem; margin-bottom: 25px; position: relative; padding-bottom: 12px; }
+        .footer-title::after { content: ''; position: absolute; left: 0; bottom: 0; width: 50px; height: 3px; background-color: var(--fresh-green); }
+        .footer-links { list-style: none; }
+        .footer-links li { margin-bottom: 15px; }
+        .footer-links li a:hover { color: var(--fresh-green); }
+        .ig-btn { display: inline-flex; align-items: center; gap: 10px; background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); color: white; padding: 10px 20px; border-radius: 25px; font-weight: 600; font-size: 0.95rem; margin-top: 15px; }
+        .footer-bottom { border-top: 1px solid #1e293b; padding-top: 25px; display: flex; justify-content: space-between; font-size: 0.9rem; color: #64748b; }
+        @media (max-width: 768px) { .footer-grid { grid-template-columns: 1fr; } .main-header { flex-direction: column; gap: 20px; } }
+    </style>
+</head>
+<body>
+    <div class="top-bar"><div class="container"><span id="current-date">Memuat tanggal...</span></div></div>
+    <header class="main-header container">
+        <div class="brand-wrapper"><a href="index.html"><img src="logo-jejak-usaha.png" alt="Logo" class="main-logo"></a><div class="brand-text"><p>Menelusuri Jejak, Menginspirasi Usaha</p></div></div>
+        <div class="search-box"><input type="text" placeholder="Cari liputan data..."><button>Cari</button></div>
+    </header>
+    <nav class="main-nav">
+        <ul class="nav-list container">
+            <li><a href="index.html">Beranda</a></li>
+            <li><a href="kategori-kuliner.html">UMKM Kuliner</a></li>
+            <li><a href="kategori-jasa.html">UMKM Jasa</a></li>
+            <li><a href="kategori-ritel.html">UMKM Ritel</a></li>
+            <li><a href="tentang-kami.html">Tentang Kami</a></li>
+        </ul>
+    </nav>
+
+    <section class="category-header">
+        <div class="container"><h1>Karir Jejak Usaha</h1></div>
+    </section>
+
+    <div class="container about-wrapper">
+        <section class="about-section">
+            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="var(--fresh-green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin: 0 auto 20px;"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+            <h2>Belum Ada Lowongan Terbuka</h2>
+            <p>Terima kasih atas ketertarikan Anda untuk bergabung bersama Jejak Usaha.<br>Saat ini kami belum membuka rekrutmen untuk Jurnalis maupun posisi lainnya.</p>
+        </section>
+    </div>
+
+    <footer class="site-footer">
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <img src="logo-jejak-usaha.png" alt="Logo" class="footer-logo">
+                <p>Media berita lokal yang mengedepankan akurasi data dan integritas informasi.</p>
+            </div>
+            <div class="footer-links-wrap">
+                <h3 class="footer-title">TAUTAN PENTING</h3>
+                <ul class="footer-links">
+                    <li><a href="tentang-kami.html">Tentang Kami</a></li>
+                    <li><a href="redaksi.html">Redaksi</a></li>
+                    <li><a href="pedoman-media-siber.html">Pedoman Media Siber</a></li>
+                    <li><a href="karir.html">Karir</a></li>
+                    <li><a href="disclaimer.html">Disclaimer & Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div class="contact-info">
+                <h3 class="footer-title">Hubungi Kami</h3>
+                <p>📍 Surabaya, Jawa Timur</p>
+                <p>✉️ jejakusaha3@gmail.com</p>
+                <a href="https://www.instagram.com/jejakusaha.id" target="_blank" class="ig-btn">Instagram Jejak Usaha</a>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <p>&copy; 2026 Jejak Usaha. Hak Cipta Dilindungi Undang-Undang.</p>
+        </div>
+    </footer>
+    <script>document.getElementById('current-date').textContent = new Date().toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });</script>
+</body>
+</html>
