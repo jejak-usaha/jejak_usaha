@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infografis: UMKM Jasa Ketintang</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            cream: '#FAF8F1',
+                            darkgreen: '#1A4D2E',
+                            freshgreen: '#4F6F52',
+                            alert: '#C63D2F',
+                            mint: '#D9E8D8',
+                            lightgray: '#EAE6D9'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #d1d5db;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem 1rem;
+            margin: 0;
+            gap: 2rem;
+            /* Pola background luar ala Jejak Usaha */
+            background-image: radial-gradient(#1A4D2E 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        .carousel-container {
+            width: 100%;
+            max-width: 500px; /* Ukuran optimal agar proporsional di layar PC & HP */
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+        .ig-slide {
+            width: 100%;
+            aspect-ratio: 4 / 5;
+            background-color: #FAF8F1;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            display: flex;
+            flex-direction: column;
+            border-radius: 1rem; /* Membuat sudut membulat seperti desain awal */
+            padding: 8%;
+        }
+        @media (max-width: 500px) {
+            .ig-slide {
+                border-radius: 0; /* Full screen di HP */
+            }
+            body { padding: 0; gap: 1rem; background-image: none; background-color: #1A4D2E;}
+        }
+        .chart-wrapper {
+            position: relative;
+            width: 100%;
+            flex-grow: 1;
+            min-height: 150px;
+        }
+    </style>
+</head>
+<body class="antialiased text-brand-darkgreen">
+
+    <div class="carousel-container">
+
+        <!-- SLIDE 1: COVER & LANSKAP -->
+        <div class="ig-slide">
+            
+            <div class="text-center z-10 mb-6 flex flex-col items-center">
+                <div class="bg-brand-darkgreen text-brand-cream px-4 py-1.5 rounded-full font-bold text-xs tracking-widest uppercase shadow-sm inline-block">
+                    LAPORAN INFOGRAFIS
+                </div>
+                <h1 class="text-4xl md:text-5xl font-black text-brand-darkgreen uppercase leading-none tracking-tight drop-shadow-sm mt-4 mb-2">
+                    UMKM JASA<br>DI KETINTANG
+                </h1>
+                <p class="text-sm text-brand-freshgreen font-semibold border-t-2 border-brand-freshgreen/30 pt-2 inline-block px-4">
+                    Adu Strategi, Komparasi Harga, dan Loyalitas
+                </p>
+            </div>
+
+            <div class="bg-white p-4 md:p-5 rounded-2xl shadow-md border border-gray-100 z-10 w-full flex flex-col flex-grow">
+                <div class="flex items-center justify-center gap-2 mb-1">
+                    <span class="text-xl">📊</span>
+                    <h2 class="font-bold text-sm md:text-base text-brand-darkgreen">Peta Aktivitas Layanan</h2>
+                </div>
+                <p class="text-center text-[10px] md:text-xs text-gray-500 mb-2">Estimasi rata-rata jumlah pelanggan harian per sektor.</p>
+                <div class="chart-wrapper">
+                    <canvas id="lanskapChart"></canvas>
+                </div>
+            </div>
+
+            <div class="mt-5 bg-brand-darkgreen text-brand-cream p-4 rounded-xl shadow-md z-10 flex items-start gap-3 border-l-4 border-brand-mint">
+                <div class="text-3xl mt-1">🎓</div>
+                <div>
+                    <h3 class="font-black text-sm uppercase">Fakta Demografi</h3>
+                    <p class="text-xs font-medium opacity-90 leading-relaxed mt-1">Lebih dari 80% basis konsumen pada sektor jasa di kawasan ini dikuasai oleh kelompok mahasiswa.</p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- SLIDE 2: LAUNDRY -->
+        <div class="ig-slide justify-between">
+            
+            <div class="text-center z-10 mb-4">
+                <h1 class="text-2xl md:text-3xl font-black text-brand-darkgreen uppercase leading-tight">
+                    Perang Efisiensi:<br>Sektor Laundry
+                </h1>
+            </div>
+
+            <div class="flex flex-col gap-4 z-10">
+                <!-- UI Card Laundry Koin -->
+                <div class="bg-white rounded-2xl shadow-md p-4 flex items-center gap-4 border-l-8 border-brand-freshgreen">
+                    <div class="bg-brand-mint text-3xl md:text-4xl p-3 md:p-4 rounded-xl flex-shrink-0">🪙</div>
+                    <div class="flex flex-col justify-center">
+                        <h4 class="font-black text-brand-darkgreen text-lg leading-none mb-1">LAUNDRY KOIN</h4>
+                        <div class="flex items-baseline gap-1 mb-1">
+                            <span class="text-brand-alert font-black text-xl md:text-2xl leading-none">Rp10.000</span>
+                            <span class="text-[10px] text-gray-500 font-bold uppercase">/ Koin</span>
+                        </div>
+                        <ul class="text-[11px] md:text-xs space-y-1 font-medium text-gray-600 mt-1">
+                            <li>⚡ Cuci Mandiri (Self-Service)</li>
+                            <li>⏱️ Penekanan pada durasi singkat</li>
+                            <li>🧺 Kapasitas: ±40 kg/hari</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- UI Card Laundry Kiloan -->
+                <div class="bg-white rounded-2xl shadow-md p-4 flex items-center gap-4 border-l-8 border-brand-darkgreen">
+                    <div class="bg-brand-lightgray text-3xl md:text-4xl p-3 md:p-4 rounded-xl flex-shrink-0">🧺</div>
+                    <div class="flex flex-col justify-center">
+                        <h4 class="font-black text-brand-darkgreen text-lg leading-none mb-1">LAUNDRY KILOAN</h4>
+                        <div class="flex items-baseline gap-1 mb-1">
+                            <span class="text-brand-freshgreen font-black text-xl md:text-2xl leading-none">Rp1,3 Juta</span>
+                            <span class="text-[10px] text-gray-500 font-bold uppercase">/ Omzet Harian</span>
+                        </div>
+                        <ul class="text-[11px] md:text-xs space-y-1 font-medium text-gray-600 mt-1">
+                            <li>🚚 Layanan mobilitas antar-jemput</li>
+                            <li>✨ Standardisasi hasil rapi dan wangi</li>
+                            <li>🎯 Target harian: Min. 20 Kantong</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="z-10 bg-brand-mint p-4 rounded-xl shadow-sm border border-brand-freshgreen/20">
+                <p class="text-xs text-brand-darkgreen font-medium leading-relaxed">
+                    💡 <strong>Analisis Konsumen:</strong> Pola konsumsi menunjukkan segmentasi yang semakin kuat — sebagian pelanggan memilih kecepatan dan kepraktisan layanan mandiri, sementara lainnya tetap mengutamakan kualitas hasil serta pengalaman layanan yang lebih maksimal.
+                </p>
+            </div>
+
+        </div>
+
+        <!-- SLIDE 3: BARBERSHOP (DATA VISUALIZATION) -->
+        <div class="ig-slide justify-between">
+            
+            <div class="text-center z-10 mb-2">
+                <h1 class="text-2xl md:text-3xl font-black text-brand-darkgreen uppercase leading-tight">
+                    Dinamika Pasar:<br>Penata Rambut
+                </h1>
+            </div>
+
+            <!-- GRAFIK KOMPARASI -->
+            <div class="bg-white p-4 rounded-2xl shadow-md z-10 border border-gray-100 flex flex-col flex-grow">
+                <div class="flex items-center justify-center gap-2 mb-1">
+                    <span class="text-xl">✂️</span>
+                    <h3 class="font-bold text-sm text-brand-darkgreen">Perbandingan Kapasitas Pelanggan</h3>
+                </div>
+                <p class="text-center text-[10px] text-gray-500 mb-2">Berdasarkan Rata-rata Pelanggan Per Hari</p>
+                <div class="chart-wrapper">
+                    <canvas id="barberChart"></canvas>
+                </div>
+            </div>
+
+            <!-- METRIK BOX -->
+            <div class="flex gap-3 z-10 my-4">
+                <div class="flex-1 bg-white rounded-xl p-3 shadow-sm border-t-4 border-brand-darkgreen text-center">
+                    <h4 class="font-black text-brand-darkgreen text-[11px] uppercase mb-1">Barber Modern</h4>
+                    <div class="text-lg font-black text-brand-darkgreen leading-none mb-1">Rp30k-35k</div>
+                    <p class="text-[9px] text-gray-500 font-medium leading-tight">Tarif Dasar. Plus: AC, Wi-Fi, Pijat.</p>
+                </div>
+                <div class="flex-1 bg-white rounded-xl p-3 shadow-sm border-t-4 border-brand-alert text-center">
+                    <h4 class="font-black text-brand-alert text-[11px] uppercase mb-1">Pangkas Konvensional</h4>
+                    <div class="text-lg font-black text-brand-alert leading-none mb-1">Rp200k-300k</div>
+                    <p class="text-[9px] text-gray-500 font-medium leading-tight">Total Omzet/Hari. Loyalitas tinggi.</p>
+                </div>
+            </div>
+
+            <div class="z-10 bg-brand-darkgreen text-brand-cream p-4 rounded-xl shadow-sm">
+                <p class="text-xs font-medium leading-relaxed">
+                    💡 <strong>Insight Strategis:</strong> Persaingan tidak lagi soal siapa yang lebih murah, tetapi siapa yang menawarkan nilai berbeda. Barbershop unggul dalam menghadirkan pengalaman dan gaya hidup, sementara cukur konvensional tetap kuat karena kedekatan, kepercayaan, dan loyalitas pelanggan.
+                </p>
+            </div>
+
+        </div>
+
+        <!-- SLIDE 4: BENGKEL -->
+        <div class="ig-slide justify-between">
+            
+            <div class="text-center z-10 mb-2">
+                <h1 class="text-2xl md:text-3xl font-black text-brand-darkgreen uppercase leading-tight">
+                    Bengkel: Menang<br>di Jam Operasional
+                </h1>
+            </div>
+
+            <!-- GRAFIK GARIS -->
+            <div class="bg-white p-4 rounded-2xl shadow-md z-10 border border-gray-100 flex flex-col flex-grow">
+                <div class="flex items-center justify-center gap-2 mb-1">
+                    <span class="text-xl">⏱️</span>
+                    <h3 class="font-bold text-sm text-brand-darkgreen">Beban Layanan Berdasarkan Waktu</h3>
+                </div>
+                <p class="text-center text-[10px] text-gray-500 mb-2">Solusi Kedodoran Servis di Malam Hari</p>
+                <div class="chart-wrapper">
+                    <canvas id="bengkelLineChart"></canvas>
+                </div>
+            </div>
+
+            <!-- EXPLANATION CARDS -->
+            <div class="flex flex-col gap-3 z-10 mt-4">
+                <div class="bg-brand-mint/50 p-3 rounded-xl border-l-4 border-brand-darkgreen flex items-start gap-3">
+                    <div class="text-2xl">🛠️</div>
+                    <div>
+                        <h4 class="font-black text-brand-darkgreen text-[13px] leading-tight mb-1">Bengkel Resmi (AHASS)</h4>
+                        <p class="text-[11px] text-gray-700 leading-relaxed font-medium">Kapasitas tinggi (<strong>~50 motor/hari</strong>) mengandalkan kapabilitas mekanik bersertifikat dan jaminan garansi.</p>
+                    </div>
+                </div>
+                <div class="bg-white p-3 rounded-xl border-l-4 border-brand-alert flex items-start gap-3 shadow-sm">
+                    <div class="text-2xl">🌙</div>
+                    <div>
+                        <h4 class="font-black text-brand-alert text-[13px] leading-tight mb-1">Bengkel Umum</h4>
+                        <p class="text-[11px] text-gray-700 leading-relaxed font-medium">Memanfaatkan ceruk malam hari. Buka hingga <strong>pukul 23:00 WIB</strong> untuk mengakomodasi kendala darurat mahasiswa.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- SCRIPT CHART.JS -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            Chart.defaults.font.family = 'Poppins';
+            Chart.defaults.color = '#1A4D2E';
+
+            // Wrap text untuk label grafik
+            function wrapLabel(text, max = 15) {
+                const words = text.split(' ');
+                let lines = [];
+                let currentLine = '';
+                words.forEach(word => {
+                    if ((currentLine + word).length > max) {
+                        if (currentLine.trim() !== '') lines.push(currentLine.trim());
+                        currentLine = word + ' ';
+                    } else {
+                        currentLine += word + ' ';
+                    }
+                });
+                if (currentLine.trim() !== '') lines.push(currentLine.trim());
+                return lines;
+            }
+
+            const commonTooltipConfig = {
+                callbacks: {
+                    title: function(tooltipItems) {
+                        const item = tooltipItems[0];
+                        let label = item.chart.data.labels[item.dataIndex];
+                        if (Array.isArray(label)) {
+                            return label.join(' ');
+                        } else {
+                            return label;
+                        }
+                    }
+                }
+            };
+
+            // 1. Bar Chart (Lanskap Pelanggan Harian) - Slide 1
+            const ctxLanskap = document.getElementById('lanskapChart');
+            if(ctxLanskap) {
+                new Chart(ctxLanskap.getContext('2d'), {
+                    type: 'bar',
+                    data: {
+                        labels: [
+                            wrapLabel('Laundry (Koin & Kiloan)'),
+                            wrapLabel('Bengkel Motor (Resmi & Umum)'),
+                            wrapLabel('Barbershop & Pangkas')
+                        ],
+                        datasets: [{
+                            label: 'Estimasi Pelanggan Harian',
+                            data: [70, 65, 35],
+                            backgroundColor: ['#4F6F52', '#739072', '#1A4D2E'],
+                            borderRadius: 4,
+                            barThickness: 'flex',
+                            maxBarThickness: 30
+                        }]
+                    },
+                    options: {
+                        indexAxis: 'y',
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        layout: { padding: { left: 0, right: 10, top: 0, bottom: 0 } },
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: commonTooltipConfig
+                        },
+                        scales: {
+                            x: {
+                                beginAtZero: true,
+                                title: { display: false },
+                                ticks: { font: { size: 9 }, stepSize: 20 },
+                                grid: { color: '#EAE6D9' }
+                            },
+                            y: { 
+                                ticks: { font: { size: 10, weight: 'bold' } },
+                                grid: { display: false }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // 2. Bar Chart (Barbershop) - Slide 3
+            const ctxBarber = document.getElementById('barberChart');
+            if(ctxBarber) {
+                new Chart(ctxBarber.getContext('2d'), {
+                    type: 'bar',
+                    data: {
+                        labels: ['Barber Modern', 'Cukur Konvensional'],
+                        datasets: [{
+                            data: [25, 12], // 12 is visual representation for >=10
+                            backgroundColor: ['#1A4D2E', '#C63D2F'],
+                            borderRadius: 4,
+                            barThickness: 'flex',
+                            maxBarThickness: 40
+                        }]
+                    },
+                    options: {
+                        indexAxis: 'y',
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        layout: { padding: { left: 0, right: 15, top: 0, bottom: 0 } },
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        let val = context.parsed.x;
+                                        if (context.dataIndex === 1) return ` Sekitar 10 - 15 Pelanggan/Hari`;
+                                        return ` Rata-rata ${val} Pelanggan/Hari`;
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            x: {
+                                beginAtZero: true,
+                                max: 30,
+                                ticks: { font: { size: 10 }, stepSize: 10 },
+                                grid: { color: '#EAE6D9' }
+                            },
+                            y: { 
+                                ticks: { font: { size: 11, weight: 'bold' } },
+                                grid: { display: false }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // 3. Line Chart (Jam Buka Bengkel) - Slide 4
+            const ctxBengkel = document.getElementById('bengkelLineChart');
+            if(ctxBengkel) {
+                new Chart(ctxBengkel.getContext('2d'), {
+                    type: 'line',
+                    data: {
+                        labels: ['07:00', '10:00', '13:00', '16:00', '19:00', '21:00', '23:00'],
+                        datasets: [
+                            {
+                                label: 'Bengkel Resmi',
+                                data: [80, 100, 90, 80, 0, 0, 0],
+                                borderColor: '#1A4D2E',
+                                backgroundColor: 'rgba(26, 77, 46, 0.1)',
+                                borderWidth: 3,
+                                fill: true,
+                                tension: 0.4,
+                                pointRadius: 3
+                            },
+                            {
+                                label: 'Bengkel Umum',
+                                data: [0, 40, 50, 60, 80, 90, 70],
+                                borderColor: '#C63D2F',
+                                backgroundColor: 'rgba(198, 61, 47, 0.1)',
+                                borderWidth: 3,
+                                fill: true,
+                                tension: 0.4,
+                                pointRadius: 3
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        layout: { padding: { left: 0, right: 5, top: 10, bottom: 0 } },
+                        plugins: {
+                            legend: { 
+                                position: 'top', 
+                                labels: { boxWidth: 10, font: {size: 10}, padding: 10 } 
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    title: function(tooltipItems) {
+                                        return 'Pukul ' + tooltipItems[0].label;
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                max: 110,
+                                ticks: { display: false },
+                                title: { display: true, text: 'Tingkat Kesibukan (Tinggi/Rendah)', font: { size: 9 } },
+                                grid: { drawBorder: false, color: '#EAE6D9' }
+                            },
+                            x: {
+                                grid: { display: false },
+                                ticks: { font: { size: 9, weight: 'bold' } }
+                            }
+                        }
+                    }
+                });
+            }
+            
+        });
+    </script>
+</body>
+</html>
+```

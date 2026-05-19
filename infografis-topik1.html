@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desain Infografis: Kuliner Ketintang</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            cream: '#FAF8F1',
+                            darkgreen: '#1A4D2E',
+                            midgreen: '#739072',
+                            freshgreen: '#4F6F52',
+                            alert: '#C63D2F',
+                            mint: '#D9E8D8'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* === KEMBALI KE MODE GULIR BAWAH (SCROLL) === */
+        body {
+            background-color: transparent;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+            padding: 1rem 0;
+            margin: 0;
+        }
+
+        .ig-slide {
+            width: 100%;
+            max-width: 1080px;
+            aspect-ratio: 4 / 5;
+            background-color: #FAF8F1;
+            position: relative;
+            overflow: hidden;
+            border-radius: 16px;
+            box-shadow: 0 15px 40px -10px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+        }
+
+        @media (max-width: 768px) {
+            .ig-slide {
+                aspect-ratio: auto;
+                min-height: 800px;
+            }
+        }
+
+        .pattern-bg {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            opacity: 0.05;
+            font-size: 2rem;
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            grid-template-rows: repeat(8, 1fr);
+            justify-items: center;
+            align-items: center;
+            z-index: 0;
+        }
+
+        .slide-content {
+            position: relative;
+            z-index: 10;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            padding: 8%;
+        }
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 450px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 400px;
+            max-height: 450px;
+        }
+
+        .callout-box {
+            background: white;
+            border-radius: 0.75rem;
+            padding: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 20;
+            border-left: 5px solid #4F6F52;
+        }
+    </style>
+</head>
+<body class="antialiased text-brand-darkgreen">
+
+    <!-- ====== SLIDE 1 (ATAS) ====== -->
+    <div class="ig-slide">
+        <div class="pattern-bg">
+            <div>🍽️</div><div>🥤</div><div>🥢</div><div>🥡</div><div>🍜</div><div>☕</div>
+            <div>🥡</div><div>🍜</div><div>☕</div><div>🍽️</div><div>🥤</div><div>🥢</div>
+            <div>🥤</div><div>🥢</div><div>🍽️</div><div>☕</div><div>🥡</div><div>🍜</div>
+            <div>🍜</div><div>☕</div><div>🥡</div><div>🥤</div><div>🥢</div><div>🍽️</div>
+            <div>🍽️</div><div>🥤</div><div>🥢</div><div>🥡</div><div>🍜</div><div>☕</div>
+            <div>🥡</div><div>🍜</div><div>☕</div><div>🍽️</div><div>🥤</div><div>🥢</div>
+            <div>🥤</div><div>🥢</div><div>🍽️</div><div>☕</div><div>🥡</div><div>🍜</div>
+            <div>🍜</div><div>☕</div><div>🥡</div><div>🥤</div><div>🥢</div><div>🍽️</div>
+        </div>
+
+        <div class="slide-content">
+            <div class="h-[15%] w-full flex flex-col items-center justify-start z-20">
+                <div class="bg-brand-darkgreen text-white px-8 py-3 rounded-full shadow-md transform -skew-x-6 mb-4">
+                    <h1 class="text-3xl md:text-4xl font-black tracking-wide drop-shadow-md skew-x-6">
+                        PETA KEKUATAN KULINER KETINTANG:
+                    </h1>
+                </div>
+                <h2 class="text-xl md:text-2xl font-semibold text-brand-darkgreen text-center max-w-3xl">
+                    Dari Makanan Berat hingga Jajanan, Apa yang Paling Mendominasi?
+                </h2>
+            </div>
+
+            <div class="h-[85%] w-full relative flex flex-col items-center justify-center mt-4 z-20">
+                
+                <div class="chart-container absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 w-full h-[350px] md:h-[450px]">
+                    <canvas id="donutChart"></canvas>
+                </div>
+
+                <!-- POSISI BOX SUDAH DIGESER AGAR TIDAK MENUTUPI TENGAH -->
+                <div class="w-full h-full relative pointer-events-none">
+                    
+                    <!-- Box Makanan Berat -->
+                    <div class="absolute top-[5%] left-[-2%] md:left-[-2%] w-[48%] md:w-[35%] callout-box pointer-events-auto border-l-brand-midgreen">
+                        <div class="flex items-center gap-2 mb-1">
+                            <span class="text-2xl">🍽️</span>
+                            <h3 class="font-bold text-brand-darkgreen text-sm md:text-base leading-tight">MAKANAN BERAT</h3>
+                        </div>
+                        <p class="text-xs md:text-sm text-gray-600 mb-2 leading-tight">Ayam Geprek, Rawon, Nasi Pecel, dll.</p>
+                        <div class="bg-yellow-100 text-brand-darkgreen text-xs font-bold px-2 py-1 rounded inline-block">
+                            Penjualan s/d 50 bungkus/hari
+                        </div>
+                    </div>
+
+                    <!-- Box Jajanan Ringan -->
+                    <div class="absolute top-[40%] right-[-2%] md:right-[-6%] w-[50%] md:w-[35%] callout-box pointer-events-auto border-l-brand-freshgreen shadow-xl transform scale-105">
+                        <div class="flex items-center gap-2 mb-1">
+                            <span class="text-2xl">🍢</span>
+                            <h3 class="font-bold text-brand-darkgreen text-sm md:text-base leading-tight">JAJANAN RINGAN</h3>
+                        </div>
+                        <p class="text-xs md:text-sm text-gray-600 mb-2 leading-tight">Pentol, Somay, Batagor, Cireng, Cimol, Pempek, dll.</p>
+                        <div class="bg-brand-mint text-brand-darkgreen text-xs font-bold px-2 py-1 rounded inline-block">
+                            Varian mendominasi lapak
+                        </div>
+                    </div>
+
+                    <!-- Box Minuman Segar -->
+                    <div class="absolute bottom-[10%] left-[0%] md:left-[2%] w-[48%] md:w-[35%] callout-box pointer-events-auto border-l-brand-darkgreen">
+                        <div class="flex items-center gap-2 mb-1">
+                            <span class="text-2xl">🥤</span>
+                            <h3 class="font-bold text-brand-darkgreen text-sm md:text-base leading-tight">MINUMAN SEGAR</h3>
+                        </div>
+                        <p class="text-xs md:text-sm text-gray-600 mb-2 leading-tight">Es Doger & Aneka Es Lainnya.</p>
+                        <div class="bg-blue-100 text-brand-darkgreen text-xs font-bold px-2 py-1 rounded inline-block">
+                            Terjual hingga 100 gelas/hari
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ====== SLIDE 2 (BAWAH) ====== -->
+    <div class="ig-slide bg-brand-cream">
+        <div class="h-[10%] w-full flex items-center justify-center pt-8">
+            <h1 class="text-3xl md:text-4xl font-black text-brand-darkgreen tracking-wide">
+                ADU OMZET & BEBAN OPERASIONAL
+            </h1>
+        </div>
+
+        <div class="h-[65%] w-full grid grid-cols-1 md:grid-cols-2 divide-y-2 md:divide-y-0 md:divide-x-2 divide-dashed divide-brand-midgreen px-12 py-8 gap-8 md:gap-0">
+            
+            <div class="flex flex-col justify-center px-4 md:pr-8">
+                <div class="text-center mb-8">
+                    <div class="text-5xl mb-2">⛺</div>
+                    <h2 class="text-2xl font-bold text-brand-darkgreen bg-brand-mint py-1 px-4 rounded-lg inline-block">STAND S.W.K</h2>
+                </div>
+
+                <div class="space-y-6">
+                    <div>
+                        <div class="flex justify-between items-end mb-1">
+                            <span class="font-bold text-sm text-gray-700 uppercase">Biaya Sewa</span>
+                            <span class="font-black text-brand-alert text-lg">Rp350k - Rp500k <span class="text-xs font-normal text-gray-500">/ Bulan</span></span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-4 overflow-hidden">
+                            <div class="bg-brand-alert h-4 rounded-full" style="width: 33%"></div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between items-end mb-1">
+                            <span class="font-bold text-sm text-gray-700 uppercase">Potensi Omzet</span>
+                            <span class="font-black text-brand-freshgreen text-xl">Hingga Rp1,5 Juta <span class="text-xs font-normal text-gray-500">/ Hari</span></span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-4 overflow-hidden">
+                            <div class="bg-brand-freshgreen h-4 rounded-full" style="width: 100%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-8 flex items-center justify-center gap-2 text-gray-600 font-medium text-sm">
+                    <span class="text-xl">⏱️</span> Buka stabil 08.00 - 24.00 WIB
+                </div>
+            </div>
+
+            <div class="flex flex-col justify-center px-4 md:pl-8">
+                <div class="text-center mb-8">
+                    <div class="text-5xl mb-2">🛒</div>
+                    <h2 class="text-2xl font-bold text-brand-darkgreen bg-brand-mint py-1 px-4 rounded-lg inline-block">P.K.L & GEROBAK</h2>
+                </div>
+
+                <div class="space-y-6">
+                    <div>
+                        <div class="flex justify-between items-end mb-1">
+                            <span class="font-bold text-sm text-gray-700 uppercase">Iuran RT</span>
+                            <span class="font-black text-brand-alert text-lg">Hanya Rp100k <span class="text-xs font-normal text-gray-500">/ Bulan</span></span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-4 overflow-hidden">
+                            <div class="bg-brand-alert h-4 rounded-full" style="width: 8%"></div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between items-end mb-1">
+                            <span class="font-bold text-sm text-gray-700 uppercase">Potensi Omzet</span>
+                            <span class="font-black text-brand-freshgreen text-xl">Rp100k - Rp600k <span class="text-xs font-normal text-gray-500">/ Hari</span></span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-4 overflow-hidden">
+                            <div class="bg-brand-freshgreen h-4 rounded-full" style="width: 40%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-8 flex items-center justify-center gap-2 text-gray-600 font-medium text-sm">
+                    <span class="text-xl">📍</span> Berpindah area jika sedang sepi
+                </div>
+            </div>
+
+        </div>
+
+        <div class="h-[25%] w-full bg-brand-mint p-8 flex flex-col md:flex-row gap-6">
+            <div class="flex-1 bg-white rounded-xl p-5 shadow-sm border border-brand-freshgreen/20 flex flex-col justify-center">
+                <div class="flex items-center gap-3 mb-2">
+                    <div class="bg-brand-darkgreen text-white p-2 rounded-lg text-2xl">🎓</div>
+                    <h3 class="font-black text-brand-darkgreen text-lg md:text-xl leading-tight">MAHASISWA<br>ADALAH KUNCI</h3>
+                </div>
+                <p class="text-sm text-gray-700 font-medium leading-relaxed">
+                    100% pedagang mengakui mahasiswa adalah urat nadi perputaran ekonomi utama mereka di kawasan ini.
+                </p>
+            </div>
+
+            <div class="flex-1 bg-white rounded-xl p-5 shadow-sm border border-brand-alert/20 flex flex-col justify-center">
+                <div class="flex items-center gap-3 mb-2">
+                    <div class="bg-brand-alert text-white p-2 rounded-lg text-2xl">📵</div>
+                    <h3 class="font-black text-brand-alert text-lg md:text-xl leading-tight">MINIM<br>DIGITALISASI</h3>
+                </div>
+                <p class="text-sm text-gray-700 font-medium leading-relaxed">
+                    Mayoritas transaksi masih konvensional. Hanya sebagian kecil mengandalkan aplikasi (maksimal 25% omzet).
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const ctx = document.getElementById('donutChart').getContext('2d');
+        
+        new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: [
+                    'Jajanan / Street Food',
+                    'Makanan Berat & Siap Saji',
+                    'Minuman Segar'
+                ],
+                datasets: [{
+                    data: [50, 30, 20],
+                    backgroundColor: [
+                        '#4F6F52', 
+                        '#739072', 
+                        '#1A4D2E'  
+                    ],
+                    borderWidth: 4,
+                    borderColor: '#FAF8F1',
+                    hoverOffset: 15
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '55%',
+                layout: {
+                    padding: 20
+                },
+                plugins: {
+                    legend: {
+                        display: false 
+                    },
+                    tooltip: {
+                        backgroundColor: 'rgba(26, 77, 46, 0.9)',
+                        titleFont: {
+                            family: 'Poppins',
+                            size: 14,
+                            weight: 'bold'
+                        },
+                        bodyFont: {
+                            family: 'Poppins',
+                            size: 14
+                        },
+                        padding: 12,
+                        cornerRadius: 8,
+                        callbacks: {
+                            label: function(context) {
+                                return ' ' + context.parsed + '% dari Total Lapak';
+                            },
+                            title: function(tooltipItems) {
+                                const item = tooltipItems[0];
+                                let label = item.chart.data.labels[item.dataIndex];
+                                if (Array.isArray(label)) {
+                                    return label.join(' ');
+                                } else {
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            plugins: [{
+                id: 'centerText',
+                beforeDraw: function(chart) {
+                    var width = chart.width,
+                        height = chart.height,
+                        ctx = chart.ctx;
+
+                    ctx.restore();
+                    var fontSize = (height / 160).toFixed(2);
+                    ctx.font = "900 " + fontSize + "em Poppins";
+                    ctx.textBaseline = "middle";
+                    ctx.fillStyle = "#1A4D2E";
+
+                    var text = "100%",
+                        textX = Math.round((width - ctx.measureText(text).width) / 2),
+                        textY = height / 2 - 10;
+
+                    ctx.fillText(text, textX, textY);
+                    
+                    ctx.font = "600 " + (fontSize/2.5).toFixed(2) + "em Poppins";
+                    ctx.fillStyle = "#4F6F52";
+                    var text2 = "Total UMKM",
+                        text2X = Math.round((width - ctx.measureText(text2).width) / 2),
+                        text2Y = height / 2 + 20;
+                        
+                    ctx.fillText(text2, text2X, text2Y);
+                    ctx.save();
+                }
+            }]
+        });
+    </script>
+</body>
+</html>

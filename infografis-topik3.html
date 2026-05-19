@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infografis: Dinamika UMKM Ritel Royal Plaza</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            cream: '#FAF8F1',
+                            darkgreen: '#1A4D2E',
+                            freshgreen: '#4F6F52',
+                            alert: '#C63D2F',
+                            mint: '#D9E8D8',
+                            lightgray: '#EAE6D9'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #d1d5db;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem 1rem;
+            margin: 0;
+            gap: 2rem;
+            background-image: radial-gradient(#1A4D2E 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        .carousel-container {
+            width: 100%;
+            max-width: 500px;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+        .ig-slide {
+            width: 100%;
+            aspect-ratio: 4 / 5;
+            background-color: #FAF8F1;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            display: flex;
+            flex-direction: column;
+            border-radius: 1rem;
+            padding: 8%;
+        }
+        @media (max-width: 500px) {
+            .ig-slide { border-radius: 0; }
+            body { padding: 0; gap: 1rem; background-image: none; background-color: #1A4D2E;}
+        }
+        .pulse-marker {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(198, 61, 47, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(198, 61, 47, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(198, 61, 47, 0); }
+        }
+    </style>
+</head>
+<body class="antialiased text-brand-darkgreen">
+
+    <div class="carousel-container">
+
+        <!-- SLIDE 1: COVER & WEEKEND SURGE -->
+        <div class="ig-slide justify-between">
+            <div class="text-center z-10 flex flex-col items-center">
+                <div class="bg-brand-darkgreen text-brand-cream px-4 py-1.5 rounded-full font-bold text-[10px] tracking-widest uppercase shadow-sm inline-block">
+                    LAPORAN INFOGRAFIS
+                </div>
+                <h1 class="text-3xl md:text-4xl font-black text-brand-darkgreen uppercase leading-none tracking-tight drop-shadow-sm mt-4 mb-2">
+                    UMKM RITEL<br>DI ROYAL PLAZA
+                </h1>
+                <p class="text-[11px] md:text-xs text-brand-freshgreen font-semibold border-t-2 border-brand-freshgreen/30 pt-2 inline-block px-4">
+                    Magis Akhir Pekan & Kerasnya Aturan Mal
+                </p>
+            </div>
+
+            <div class="bg-white p-4 rounded-2xl shadow-md border border-gray-100 z-10 w-full flex flex-col flex-grow relative my-4">
+                <div class="flex items-center justify-center gap-2 mb-1">
+                    <span class="text-lg">📈</span>
+                    <h2 class="font-bold text-sm md:text-base text-brand-darkgreen">Fenomena "Weekend Surge"</h2>
+                </div>
+                <p class="text-center text-[9px] md:text-[10px] text-gray-500 mb-2">Perbandingan Lonjakan Omzet UMKM Ritel</p>
+                
+                <div class="relative w-full flex-grow" style="min-height: 150px;">
+                    <canvas id="weekendSurgeChart"></canvas>
+                </div>
+                
+                <div class="absolute top-[28%] right-[8%] bg-brand-alert text-white text-[9px] font-bold px-2 py-1 rounded shadow-lg pulse-marker pointer-events-none transform translate-x-4 -translate-y-4">
+                    Lonjakan >100%
+                    <div class="absolute w-2 h-2 bg-brand-alert transform rotate-45 -bottom-1 left-1/2 -translate-x-1/2"></div>
+                </div>
+            </div>
+
+            <div class="bg-brand-mint p-3 rounded-xl shadow-sm z-10 border border-brand-freshgreen/20">
+                <p class="text-[11px] md:text-xs font-semibold leading-relaxed text-center text-brand-darkgreen">
+                    "Trafik pengunjung akhir pekan adalah nyawa utama bagi mayoritas tenant ritel di Royal Plaza."
+                </p>
+            </div>
+        </div>
+
+        <!-- SLIDE 2: SKALA PENDAPATAN (DATA VISUALIZATION) -->
+        <div class="ig-slide justify-between">
+            <div class="text-center z-10 mb-2">
+                <h1 class="text-2xl md:text-3xl font-black text-brand-darkgreen uppercase leading-tight">
+                    Skala Pendapatan
+                </h1>
+                <p class="text-xs text-brand-freshgreen font-medium">Omzet Kosmetik vs Barang Mewah</p>
+            </div>
+
+            <!-- GRAFIK KOMPARASI OMZET -->
+            <div class="bg-white p-4 rounded-2xl shadow-md z-10 border border-gray-100 flex flex-col w-full flex-grow my-2">
+                <div class="flex items-center justify-center gap-2 mb-1">
+                    <span class="text-lg">📊</span>
+                    <h3 class="font-bold text-sm md:text-base text-brand-darkgreen">Estimasi Omzet Kotor Bulanan</h3>
+                </div>
+                <p class="text-center text-[9px] text-gray-500 mb-2">Berdasarkan komparasi nilai jual dan volume transaksi.</p>
+                <div class="relative w-full flex-grow" style="min-height: 160px;">
+                    <canvas id="omzetChart"></canvas>
+                </div>
+            </div>
+
+            <!-- METRIK TAMBAHAN -->
+            <div class="flex flex-col gap-3 z-10 w-full mt-2">
+                <div class="bg-brand-mint/50 rounded-xl p-3 shadow-sm border-l-4 border-brand-freshgreen flex items-start gap-3">
+                    <div class="text-2xl">💄</div>
+                    <div>
+                        <h4 class="font-black text-brand-darkgreen text-[12px] uppercase">Skincare Premium</h4>
+                        <p class="text-[10px] md:text-[11px] text-gray-700 font-medium leading-tight mt-1">Melayani hingga 500 pelanggan dengan harga produk premium (>Rp127rb), mencatatkan omzet kotor fantastis.</p>
+                    </div>
+                </div>
+                <div class="bg-white rounded-xl p-3 shadow-sm border-l-4 border-gray-400 flex items-start gap-3">
+                    <div class="text-2xl">👜</div>
+                    <div>
+                        <h4 class="font-black text-gray-800 text-[12px] uppercase">Tas & Dompet Kulit</h4>
+                        <p class="text-[10px] md:text-[11px] text-gray-700 font-medium leading-tight mt-1">Rata-rata omzet Rp40 Juta/Bulan. Transaksi lebih sedikit namun tertolong oleh nilai jual barang yang tinggi (mencapai Rp2 Juta).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 3: TANTANGAN LOKASI (DATA VISUALIZATION) -->
+        <div class="ig-slide justify-start">
+            <div class="text-center z-10 mb-4">
+                <h1 class="text-2xl md:text-3xl font-black text-brand-darkgreen uppercase leading-tight">
+                    Ironi Lokasi
+                </h1>
+                <p class="text-xs text-brand-freshgreen font-medium">Strategis vs Area Kurang Pengaruh</p>
+            </div>
+
+            <!-- GRAFIK SUMBER TRAFIK -->
+            <div class="bg-white p-4 rounded-2xl shadow-md z-10 border border-gray-100 flex flex-col w-full mb-4 flex-grow">
+                <div class="flex items-center justify-center gap-2 mb-1">
+                    <span class="text-lg">🎯</span>
+                    <h3 class="font-bold text-sm md:text-base text-brand-darkgreen">Sumber Kedatangan Pelanggan</h3>
+                </div>
+                <p class="text-center text-[9px] md:text-[10px] text-gray-500 mb-2">Persentase konversi pembeli berdasarkan lokasi.</p>
+                <div class="relative w-full flex-grow" style="min-height: 120px;">
+                    <canvas id="lokasiChart"></canvas>
+                </div>
+            </div>
+
+            <!-- NARASI -->
+            <div class="flex flex-col gap-3 z-10 w-full">
+                <div class="bg-white rounded-xl p-4 shadow-sm border-l-4 border-brand-freshgreen">
+                    <h3 class="font-black text-brand-darkgreen text-[12px] md:text-[13px] uppercase mb-1 flex items-center gap-1">🚶‍♂️ Lantai Ramai (Area Bawah)</h3>
+                    <p class="text-[10px] md:text-[11px] text-gray-700 font-medium leading-relaxed">
+                        Posisi yang berada di pusat lalu-lalang pengunjung membuat toko lebih mudah menarik perhatian secara masif. Visibilitas tinggi ini meningkatkan potensi kedatangan pelanggan tanpa perlu promosi yang agresif.
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-xl p-4 shadow-sm border-l-4 border-brand-alert">
+                    <h3 class="font-black text-brand-alert text-[12px] md:text-[13px] uppercase mb-1 flex items-center gap-1">🧲 Lantai Atas / Area Pojok</h3>
+                    <p class="text-[10px] md:text-[11px] text-gray-700 font-medium leading-relaxed">
+                        Terbatasnya arus pengunjung membuat toko kurang terekspos secara alami. Kondisi ini mendorong pelaku usaha untuk lebih kreatif memanfaatkan media sosial dan strategi pemasaran digital guna mendatangkan pelanggan ke lokasi usaha.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 4: REALITA REGULASI & INSIGHT STRATEGIS -->
+        <div class="ig-slide justify-center bg-brand-darkgreen">
+            <div class="text-center z-10 mb-8 mt-4">
+                <h1 class="text-2xl md:text-3xl font-black text-brand-cream uppercase leading-tight border-b-2 border-brand-alert pb-2 inline-block">
+                    Realita Kedisiplinan
+                </h1>
+            </div>
+
+            <!-- ALERT BOX RAKSASA -->
+            <div class="bg-brand-alert rounded-2xl shadow-2xl p-6 md:p-8 flex flex-col items-center text-center z-10 border border-red-400 relative overflow-hidden transform transition hover:scale-[1.02] mb-6 w-full">
+                <div class="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white to-transparent" style="background-size: 20px 20px;"></div>
+                
+                <div class="bg-white text-brand-alert w-16 h-16 rounded-full flex items-center justify-center text-4xl font-black shadow-lg mb-4 relative z-10">
+                    ⚠️
+                </div>
+                
+                <h4 class="font-bold text-white text-sm tracking-widest uppercase mb-1 relative z-10">Sanksi Pelanggaran</h4>
+                <div class="text-4xl md:text-5xl font-black text-white leading-none mb-4 drop-shadow-md relative z-10">DENDA<br>Rp250.000</div>
+                
+                <div class="w-16 h-1 bg-white/50 mb-4 relative z-10"></div>
+                
+                <p class="text-[11px] md:text-xs text-white font-medium leading-relaxed relative z-10">
+                    Berlaku tegas bagi tenant UMKM yang <strong>terlambat membuka gerai</strong> atau nekat <strong>menutup lapak lebih awal</strong> dari jam operasional standar mal.
+                </p>
+            </div>
+
+            <div class="mt-auto mb-4 z-10 w-full">
+                <p class="text-[11px] md:text-[12px] font-medium leading-relaxed text-brand-cream opacity-90 text-center px-2">
+                    💡 <strong>Insight Strategis:</strong> Berada di dalam pusat perbelanjaan modern membuka peluang besar melalui citra usaha yang lebih prestisius dan tingginya aktivitas konsumen. Namun, di balik peluang tersebut, UMKM dituntut untuk mampu beradaptasi dengan standar operasional, aturan, dan ritme kerja yang lebih profesional.
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- SCRIPT CHART.JS -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            Chart.defaults.font.family = 'Poppins';
+            Chart.defaults.color = '#1A4D2E';
+
+            function wrapLabel(text, max = 15) {
+                const words = text.split(' ');
+                let lines = [];
+                let currentLine = '';
+                words.forEach(word => {
+                    if ((currentLine + word).length > max) {
+                        if (currentLine.trim() !== '') lines.push(currentLine.trim());
+                        currentLine = word + ' ';
+                    } else {
+                        currentLine += word + ' ';
+                    }
+                });
+                if (currentLine.trim() !== '') lines.push(currentLine.trim());
+                return lines;
+            }
+
+            // 1. Line Chart (Weekend Surge) - Slide 1
+            const ctxSurge = document.getElementById('weekendSurgeChart');
+            if(ctxSurge) {
+                new Chart(ctxSurge.getContext('2d'), {
+                    type: 'line',
+                    data: {
+                        labels: ['Senin - Jumat', 'Sabtu - Minggu'],
+                        datasets: [
+                            {
+                                label: 'Aneka Barang',
+                                data: [450, 1100], 
+                                borderColor: '#C63D2F',
+                                backgroundColor: '#C63D2F',
+                                borderWidth: 3,
+                                tension: 0.1,
+                                pointRadius: 5,
+                                pointBackgroundColor: '#fff',
+                                pointBorderWidth: 2
+                            },
+                            {
+                                label: 'Gerai Parfum',
+                                data: [1500, 3000], 
+                                borderColor: '#4F6F52',
+                                backgroundColor: '#4F6F52',
+                                borderWidth: 3,
+                                tension: 0.1,
+                                pointRadius: 5,
+                                pointBackgroundColor: '#fff',
+                                pointBorderWidth: 2
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        layout: { padding: { left: 0, right: 10, top: 20, bottom: 0 } },
+                        plugins: {
+                            legend: { 
+                                position: 'bottom', 
+                                labels: { boxWidth: 10, font: {size: 10, weight: 'bold'}, padding: 10 } 
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        let val = context.parsed.y;
+                                        let formatted = (val >= 1000) ? `Rp${(val/1000).toFixed(1)} Jt` : `Rp${val} Ribu`;
+                                        return ` ${context.dataset.label}: ${formatted}`;
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                max: 3500,
+                                ticks: { 
+                                    font: { size: 9, weight: 'bold' },
+                                    stepSize: 1000,
+                                    callback: function(value) {
+                                        if(value === 0) return '0';
+                                        return (value/1000) + ' Jt';
+                                    }
+                                },
+                                title: { display: false },
+                                grid: { color: '#EAE6D9', borderDash: [5, 5] }
+                            },
+                            x: {
+                                grid: { display: false },
+                                ticks: { font: { size: 10, weight: 'bold' } }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // 2. Bar Chart (Omzet Bulanan) - Slide 2
+            const ctxOmzet = document.getElementById('omzetChart');
+            if(ctxOmzet) {
+                new Chart(ctxOmzet.getContext('2d'), {
+                    type: 'bar',
+                    data: {
+                        labels: ['Booth Skincare', 'Tas & Kulit'],
+                        datasets: [{
+                            label: 'Omzet Bulanan (Juta Rp)',
+                            data: [100, 40],
+                            backgroundColor: ['#4F6F52', '#1A4D2E'],
+                            borderRadius: 6,
+                            barThickness: 'flex',
+                            maxBarThickness: 50
+                        }]
+                    },
+                    options: {
+                        indexAxis: 'y',
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        layout: { padding: { left: 0, right: 20, top: 0, bottom: 0 } },
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        return ` Rp${context.parsed.x} Juta / Bulan`;
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            x: {
+                                beginAtZero: true,
+                                max: 120,
+                                ticks: { 
+                                    font: { size: 10, weight: 'bold' },
+                                    callback: function(value) { return value + ' Juta'; }
+                                },
+                                grid: { color: '#EAE6D9' }
+                            },
+                            y: { 
+                                ticks: { font: { size: 10, weight: 'bold' } },
+                                grid: { display: false }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // 3. Stacked Bar Chart (Sumber Trafik/Lokasi) - Slide 3
+            const ctxLokasi = document.getElementById('lokasiChart');
+            if(ctxLokasi) {
+                new Chart(ctxLokasi.getContext('2d'), {
+                    type: 'bar',
+                    data: {
+                        labels: ['Lantai Bawah (Ramai)', 'Lantai Atas / Pojok'],
+                        datasets: [
+                            {
+                                label: 'Visibilitas Organik',
+                                data: [85, 20],
+                                backgroundColor: '#4F6F52',
+                                borderRadius: {topLeft: 6, bottomLeft: 6}
+                            },
+                            {
+                                label: 'Promosi / Digital',
+                                data: [15, 80],
+                                backgroundColor: '#C63D2F',
+                                borderRadius: {topRight: 6, bottomRight: 6}
+                            }
+                        ]
+                    },
+                    options: {
+                        indexAxis: 'y',
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        layout: { padding: { left: 0, right: 0, top: 5, bottom: 0 } },
+                        plugins: {
+                            legend: { 
+                                position: 'top', 
+                                labels: { boxWidth: 10, font: {size: 9, weight: 'bold'}, padding: 8 } 
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        return ` ${context.dataset.label}: ${context.parsed.x}%`;
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            x: {
+                                stacked: true,
+                                max: 100,
+                                ticks: { display: false },
+                                grid: { display: false, drawBorder: false }
+                            },
+                            y: { 
+                                stacked: true,
+                                ticks: { font: { size: 9, weight: 'bold' } },
+                                grid: { display: false, drawBorder: false }
+                            }
+                        }
+                    }
+                });
+            }
+            
+        });
+    </script>
+</body>
+</html>

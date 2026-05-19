@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jejak Usaha | Menelusuri Jejak, Menginspirasi Usaha</title>
     
-    <!-- Google Fonts: Merriweather untuk Judul, Inter untuk Teks -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:ital,wght@0,400;0,700;0,900;1,400&display=swap" rel="stylesheet">
@@ -37,10 +36,7 @@
         /* === 2. HEADER UTAMA === */
         .main-header { padding: 35px 0; display: flex; align-items: center; justify-content: space-between; }
         .brand-wrapper { display: flex; align-items: center; gap: 25px; }
-        
-        /* LOGO DIPERBESAR DI SINI */
-        .main-logo { height: 130px; width: auto; max-width: 450px; object-fit: contain; }
-        
+        .main-logo { height: 130px; width: auto; max-width: 450px; object-fit: contain; transition: height 0.3s ease; }
         .brand-text { border-left: 3px solid var(--fresh-green); padding-left: 20px; }
         .brand-text p { font-size: 0.95rem; color: var(--text-gray); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; max-width: 250px; line-height: 1.4; }
         
@@ -55,7 +51,7 @@
         .nav-list li a:hover::after, .nav-list li a.active::after { width: 100%; }
         .nav-list li a::after { content: ''; position: absolute; width: 0; height: 3px; bottom: 0; left: 0; background-color: var(--fresh-green); transition: width 0.3s ease; }
 
-        /* === 4. NEWS TICKER (BERITA BERJALAN) === */
+        /* === 4. NEWS TICKER === */
         .news-ticker-wrap { background-color: var(--dark-green); border-top: 1px solid rgba(255,255,255,0.1); color: var(--white); display: flex; align-items: center; font-size: 0.9rem; overflow: hidden; }
         .ticker-label { background-color: var(--fresh-green); padding: 10px 20px; font-weight: 800; text-transform: uppercase; z-index: 2; }
         .ticker-content { flex-grow: 1; padding: 0 15px; overflow: hidden; }
@@ -81,7 +77,6 @@
         
         .news-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; }
         .news-card { border: 1px solid var(--border-color); border-radius: 12px; overflow: hidden; background-color: var(--white); display: flex; flex-direction: column; transition: all 0.3s ease; }
-        .news-card:hover { transform: translateY(-8px); box-shadow: 0 15px 35px rgba(0,0,0,0.1); }
         .card-img-wrap { height: 230px; overflow: hidden; border-bottom: 4px solid var(--fresh-green); }
         .card-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
         .news-card:hover img { transform: scale(1.05); }
@@ -116,9 +111,55 @@
         .ig-btn { display: inline-flex; align-items: center; gap: 10px; background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); color: white; padding: 12px 24px; border-radius: 30px; font-weight: 700; margin-top: 15px; }
         .footer-bottom { border-top: 1px solid #1e293b; padding-top: 25px; display: flex; justify-content: space-between; font-size: 0.9rem; color: #64748b;}
 
-        /* MEDIA QUERIES */
-        @media (max-width: 992px) { .content-wrapper, .hero-inner, .footer-grid { grid-template-columns: 1fr; } .main-header { flex-direction: column; gap: 25px; } .search-box input { width: 100%; } }
-        @media (max-width: 768px) { .news-grid { grid-template-columns: 1fr; } .nav-list { gap: 15px; flex-wrap: wrap; justify-content: center; } .nav-list li a { font-size: 0.8rem; padding: 10px 5px; } }
+
+        /* ======================================================= */
+        /* === KODINGAN KHUSUS UNTUK TAMPILAN HP (RESPONSIVE) ==== */
+        /* ======================================================= */
+        
+        /* Untuk Layar Tablet (Maks 992px) */
+        @media (max-width: 992px) { 
+            .content-wrapper, .hero-inner, .footer-grid { grid-template-columns: 1fr; gap: 30px; } 
+            .main-header { flex-direction: column; gap: 15px; text-align: center; padding: 20px 0;} 
+            .brand-wrapper { flex-direction: column; gap: 10px; }
+            .brand-text { border-left: none; border-top: 3px solid var(--fresh-green); padding-left: 0; padding-top: 10px; }
+            .search-box { width: 100%; justify-content: center; }
+            .search-box input { width: 100%; max-width: 300px; }
+        }
+
+        /* Untuk Layar HP (Maks 768px) */
+        @media (max-width: 768px) { 
+            /* 1. Mengecilkan Logo dan Teks Header */
+            .main-logo { height: 75px; } /* <-- Rahasia logo rapi di HP */
+            .brand-text p { font-size: 0.8rem; max-width: 100%; }
+            
+            /* 2. Menu Navigasi Bisa Di-Swipe/Geser */
+            .main-nav .container { padding: 0; }
+            .nav-list { 
+                justify-content: flex-start; 
+                overflow-x: auto; 
+                flex-wrap: nowrap; 
+                padding: 0 20px; 
+                gap: 20px;
+                -webkit-overflow-scrolling: touch; /* Smooth scroll di HP */
+                scrollbar-width: none; /* Sembunyikan scrollbar bawaan */
+            }
+            .nav-list::-webkit-scrollbar { display: none; }
+            .nav-list li a { font-size: 0.85rem; padding: 15px 5px; white-space: nowrap; }
+            
+            /* 3. Menyesuaikan Tata Letak Konten & Gambar */
+            .hero-image img { height: 220px; }
+            .hero-content h2 { font-size: 1.8rem; margin-bottom: 15px; }
+            .hero-content p { font-size: 1rem; }
+            .section-title { font-size: 1.7rem; }
+            
+            /* 4. Menyesuaikan Grid Berita & Footer */
+            .news-grid { grid-template-columns: 1fr; gap: 20px; } 
+            .card-img-wrap { height: 200px; }
+            .footer-grid { text-align: center; }
+            .footer-brand, .contact-info { align-items: center; }
+            .footer-title::after { left: 50%; transform: translateX(-50%); }
+            .footer-bottom { flex-direction: column; gap: 10px; text-align: center;}
+        }
     </style>
 </head>
 <body>
@@ -132,7 +173,6 @@
     <header class="main-header container">
         <div class="brand-wrapper">
             <a href="index.html">
-                <!-- LOGO TANPA FOLDER IMAGES -->
                 <img src="logo-jejak-usaha.png" alt="Logo Jejak Usaha" class="main-logo">
             </a>
             <div class="brand-text"><p>Menelusuri Jejak, Menginspirasi Usaha</p></div>
@@ -143,7 +183,7 @@
         </div>
     </header>
 
-    <!-- 3. NAVIGASI UTAMA (MULTI-PAGE) -->
+    <!-- 3. NAVIGASI UTAMA -->
     <nav class="main-nav">
         <ul class="nav-list container">
             <li><a href="index.html" class="active">Beranda</a></li>
@@ -162,7 +202,6 @@
                 <span><b>KULINER:</b> Ketintang Jadi Kantong Kuliner Mahasiswa, Ini Sebaran Jenis Dagangannya</span>
                 <span><b>JASA:</b> Geliat Bisnis Cuci Pakaian: Adu Kuat Omzet Laundry Koin vs Laundry Kiloan</span>
                 <span><b>RITEL:</b> Siasat Ritel Royal Plaza Pikat Pembeli Melalui Adu Strategi Pajangan Hingga Konten Digital</span>
-                <span><b>DATA:</b> Mayoritas UMKM Ketintang Gunakan QRIS Namun Tetap Bertumpu Konvensional</span>
             </div>
         </div>
     </div>
@@ -180,6 +219,7 @@
         </div>
     </section>
 
+    <!-- 6. MAIN KONTEN -->
     <div class="container content-wrapper">
         <main>
             <!-- SEKSI 1: UMKM KULINER -->
@@ -241,61 +281,6 @@
                             <p>Perbedaan perputaran uang mencapai 3x lipat. Temukan rahasia di balik angka omzet harian mereka.</p>
                         </div>
                     </article>
-                    <article class="news-card">
-                        <div class="card-img-wrap"><a href="topik2-berita3.html"><img src="topik2-berita3.png" alt="Jasa 3"></a></div>
-                        <div class="card-body">
-                            <span class="meta-author">Burhanudin Yusuf</span>
-                            <h3><a href="topik2-berita3.html">Adu Strategi Bengkel: Garansi Resmi AHASS vs Bengkel Umum</a></h3>
-                            <p>Bagaimana mekanik AHASS dan bengkel konvensional membangun loyalitas di tengah ketatnya persaingan.</p>
-                        </div>
-                    </article>
-                    <article class="news-card">
-                        <div class="card-img-wrap"><a href="topik2-berita4.html"><img src="topik2-berita4.png" alt="Jasa 4"></a></div>
-                        <div class="card-body">
-                            <span class="meta-author">Seka Ramajati</span>
-                            <h3><a href="topik2-berita4.html">Barbershop Modern vs Cukur Tradisional di Ketintang</a></h3>
-                            <p>Kenyamanan fasilitas modern bersaing dengan loyalitas pelanggan jasa cukur konvensional.</p>
-                        </div>
-                    </article>
-                </div>
-            </section>
-
-            <!-- SEKSI 3: UMKM RITEL -->
-            <section id="ritel" class="news-category">
-                <h2 class="section-title">UMKM Ritel</h2>
-                <div class="news-grid">
-                    <article class="news-card">
-                        <div class="card-img-wrap"><a href="topik3-berita1.html"><img src="topik3-berita1.png" alt="Ritel 1"></a></div>
-                        <div class="card-body">
-                            <span class="meta-author">Raditya Budi Prianugraha</span>
-                            <h3><a href="topik3-berita1.html">Cara UMKM Toko Bertahan di Tengah Ramainya Royal Plaza</a></h3>
-                            <p>Strategi pedagang ritel mulai dari kaus kaki hingga skincare untuk menarik pengunjung mal.</p>
-                        </div>
-                    </article>
-                    <article class="news-card">
-                        <div class="card-img-wrap"><a href="topik3-berita2.html"><img src="topik3-berita2.png" alt="Ritel 2"></a></div>
-                        <div class="card-body">
-                            <span class="meta-author">Deni Agus Wicaksono</span>
-                            <h3><a href="topik3-berita2.html">Peta Kekuatan Omzet Berdasarkan Tata Letak Lapak Mal</a></h3>
-                            <p>Anomali data di Royal Plaza: Kenapa lokasi sepi bisa cetak ratusan juta per bulan?</p>
-                        </div>
-                    </article>
-                    <article class="news-card">
-                        <div class="card-img-wrap"><a href="topik3-berita3.html"><img src="topik3-berita3.png" alt="Ritel 3"></a></div>
-                        <div class="card-body">
-                            <span class="meta-author">Burhanudin Yusuf</span>
-                            <h3><a href="topik3-berita3.html">Siasat Pikat Pembeli: Pajangan vs Konten Digital</a></h3>
-                            <p>Analisis visual merchandising dan peran media sosial bagi tenant ritel mal.</p>
-                        </div>
-                    </article>
-                    <article class="news-card">
-                        <div class="card-img-wrap"><a href="topik3-berita4.html"><img src="topik3-berita4.png" alt="Ritel 4"></a></div>
-                        <div class="card-body">
-                            <span class="meta-author">Seka Ramajati</span>
-                            <h3><a href="topik3-berita4.html">Mengukur Dampak Lokasi dan Fluktuasi Pengunjung</a></h3>
-                            <p>Korelasi posisi tenant dan "Golden Hours" terhadap konversi pembeli harian.</p>
-                        </div>
-                    </article>
                 </div>
             </section>
         </main>
@@ -321,13 +306,10 @@
     <!-- 8. FOOTER -->
     <footer class="site-footer">
         <div class="container footer-grid">
-            
             <div class="footer-brand">
-                <!-- LOGO TANPA FOLDER IMAGES -->
                 <img src="logo-jejak-usaha.png" alt="Logo Jejak Usaha" class="footer-logo">
                 <p>Media berita lokal yang mengedepankan akurasi data dan integritas informasi untuk masyarakat cerdas yang berfokus pemberdayaan UMKM lokal.</p>
             </div>
-            
             <div class="footer-links-wrap">
                 <h3 class="footer-title">TAUTAN PENTING</h3>
                 <ul class="footer-links">
@@ -338,14 +320,11 @@
                     <li><a href="disclaimer.html">Disclaimer & Privacy Policy</a></li>
                 </ul>
             </div>
-
             <div class="contact-info">
                 <h3 class="footer-title">Hubungi Kami</h3>
                 <p>📍 Surabaya, Jawa Timur</p>
                 <p>✉️ jejakusaha3@gmail.com</p>
-                <a href="https://www.instagram.com/jejakusaha.id?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" class="ig-btn">
-                    Instagram Jejak Usaha
-                </a>
+                <a href="https://www.instagram.com/jejakusaha.id" target="_blank" class="ig-btn">Instagram Jejak Usaha</a>
             </div>
         </div>
         <div class="container footer-bottom">
